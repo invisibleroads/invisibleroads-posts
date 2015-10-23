@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}
+{% if request.path[1:] %} {{ render_title(request.path) }} &middot; {% endif %}
+{{ website_name }}
+{% endblock %}</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>{% block head_style_inline %}{% endblock %}</style>
+<script>
+var d = {};
+var v = d.posts = {};
+v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
+{% block head_script_inline %}{% endblock %}
+</script>
+</head>
+<body>
+<nav id="top-navbar" class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#">{{ website_name }}</a>
+    </div>
+    <div id="top-navbar-collapse" class="navbar-collapse collapse">
+      <ul class="navbar-nav nav">
+      {% for section in website_sections %}
+        <li><a href="/#{{ section.lower() }}">{{ section }}</a></li>
+      {% endfor %}
+      </ul>
+      {% block navigation %}{% endblock %}
+    </div>
+  </div>
+</nav>
+{% block body_header %}{% endblock %}
+<div class="container-fluid">{% block body_content %}{% endblock %}</div>
+{% block body_footer %}{% endblock %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/jquery.min.js') }}">\x3C/script>')</script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap.min.js') }}">\x3C/script>')</script>
+{% block body_script_loaded %}
+<script src="{{ request.static_path('invisibleroads_posts:assets/base.js') }}"></script>
+{% endblock %}
+<script>{% block body_script_inline %}{% endblock %}</script>
+</body>
+</html>

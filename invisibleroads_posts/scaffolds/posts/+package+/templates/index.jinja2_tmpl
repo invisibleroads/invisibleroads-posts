@@ -1,0 +1,7 @@
+{% extends "invisibleroads_posts:templates/base.jinja2" %}
+{% block body_content %}
+<div id=clock></div>
+{% endblock %}
+{% block body_script_loaded %}
+<script src="\{\{ request.static_path('{{ package }}:assets/base.js') \}\}"></script>
+{% endblock %}

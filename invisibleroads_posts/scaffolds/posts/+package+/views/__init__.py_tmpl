@@ -1,0 +1,16 @@
+from os.path import exists, join
+from pyramid.response import FileResponse
+
+
+def add_routes(config):
+    config.add_view(
+        index, renderer='{{ package }}:templates/index.jinja2',
+        route_name='index')
+
+
+def index(request):
+    settings = request.registry.settings
+    path = join(settings['data.folder'], 'index.html')
+    if not exists(path):
+        return dict()
+    return FileResponse(path, request)

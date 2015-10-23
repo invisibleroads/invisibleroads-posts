@@ -1,0 +1,17 @@
+from pyramid.config import Configurator
+
+from .views import add_routes
+
+
+def main(global_config, **settings):
+    config = Configurator(settings=settings)
+    includeme(config)
+    return config.make_wsgi_app()
+
+
+def includeme(config):
+    config.include('invisibleroads_posts')
+    config.add_static_view(
+        '_/{{ project }}', '{{ package }}:assets',
+        cache_max_age=3600)
+    add_routes(config)

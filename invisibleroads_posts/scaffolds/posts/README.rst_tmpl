@@ -1,0 +1,32 @@
+{{project}}
+===========
+- [InvisibleRoads Posts](https://github.com/invisibleroads/invisibleroads-packages/tree/master/posts) 0.4
+
+
+Use
+---
+Prepare environment.
+
+    VIRTUAL_ENV=~/.virtualenvs/crosscompute
+    virtualenv ${VIRTUAL_ENV}
+    source ${VIRTUAL_ENV}/bin/activate
+
+    NODE_PATH=${VIRTUAL_ENV}/lib/node_modules
+    npm install -g browserify uglify-js
+
+Install project.
+
+    cd ~/Projects/{{ project }}
+    python setup.py develop
+
+Launch development server.
+
+    mkdir -p {{ package }}/assets
+    bash refresh.sh -d
+    pserve development.ini
+
+Launch production server.
+
+    mkdir -p {{ package }}/assets
+    bash refresh.sh
+    pserve production.ini

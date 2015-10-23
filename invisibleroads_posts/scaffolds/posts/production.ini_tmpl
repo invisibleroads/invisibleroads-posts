@@ -1,0 +1,51 @@
+[app:main]
+use = egg:{{ project }}
+data.folder = %(here)s/data_production
+
+website.name = {{ project }}
+website.sections =
+website.folder = %(here)s
+website.root_asset_paths =
+    invisibleroads_posts:assets/favicon.ico
+    invisibleroads_posts:assets/robots.txt
+
+cache.function.backend = dogpile.cache.memory
+cache.function.expiration_time = 3600
+
+jinja2.trim_blocks = true
+jinja2.lstrip_blocks = true
+
+pyramid.reload_templates = false
+pyramid.prevent_http_cache = false
+pyramid.debug_authorization = false
+pyramid.debug_notfound = false
+pyramid.debug_routematch = false
+pyramid.default_locale_name = en
+pyramid.includes =
+
+[server:main]
+use = egg:waitress#main
+host = 0.0.0.0
+port = 8000
+url_scheme = https
+
+[loggers]
+keys = root, {{ package }}
+[handlers]
+keys = console
+[formatters]
+keys = generic
+[logger_root]
+level = WARN
+handlers = console
+[logger_{{ package }}]
+level = WARN
+handlers =
+qualname = {{ package }}
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+[formatter_generic]
+format = %(asctime)s %(levelname)-5.5s [%(name)s:%(lineno)s][%(threadName)s] %(message)s
