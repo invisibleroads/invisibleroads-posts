@@ -15,6 +15,6 @@ class InitializePostsScript(ConfigurableScript):
         settings = get_appsettings(args.configuration_path)
         if args.restart and 'data.folder' in settings:
             remove_path(settings['data.folder'])
-        for key, value in settings.iteritems():
+        for key, value in settings.items():
             if key.endswith('.folder'):
                 make_folder(value)
