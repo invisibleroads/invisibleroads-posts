@@ -2,9 +2,9 @@ InvisibleRoads Posts
 ====================
 Posts form the foundation for most of our web applications.
 
-- `Pyramid <http://docs.pylonsproject.org/en/latest/docs/pyramid.html>`_ 1.5.7
-- `Bootstrap <http://getbootstrap.com>`_ 3.3.5
-- `JQuery <http://jquery.com>`_ 1.11.3
+- Pyramid_ 1.5.7
+- Bootstrap_ 3.3.5
+- JQuery_ 1.11.3
 
 
 Use
@@ -110,7 +110,7 @@ Prepare assets. ::
     cd ${TARGET_FOLDER}
     bash refresh.sh
 
-Add `Bootstrap <http://getbootstrap.com>`_. ::
+Add Bootstrap_. ::
 
     BOOTSTRAP_VERSION=3.3.5
     cd ~/Documents
@@ -120,8 +120,13 @@ Add `Bootstrap <http://getbootstrap.com>`_. ::
     cp css/bootstrap.min.css ${ASSETS_FOLDER}
     cp js/bootstrap.min.js ${ASSETS_FOLDER}
 
-Add `JQuery <http://jquery.com>`_. ::
+Add JQuery_. ::
 
     JQUERY_VERSION=1.11.3
     cd ${ASSETS_FOLDER}
     wget http://code.jquery.com/jquery-${JQUERY_VERSION}.min.js -O jquery.min.js
+
+
+.. _Pyramid: http://docs.pylonsproject.org/en/latest/docs/pyramid.html
+.. _Bootstrap: http://getbootstrap.com
+.. _JQuery: http://jquery.com
