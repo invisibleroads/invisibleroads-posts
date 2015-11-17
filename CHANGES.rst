@@ -1,6 +1,6 @@
 0.4
 ---
-- Use pronounceable alphabet for URL codes
+- Add meta description
 
 0.3
 ---
