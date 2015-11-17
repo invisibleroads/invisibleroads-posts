@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}
+<meta name="description" content="{% block page_description %}{{ website_name}}{% endblock %}">
+<title>{% block page_title %}
 {% if request.path[1:] %} {{ render_title(request.path) }} &middot; {% endif %}
 {{ website_name }}
 {% endblock %}</title>
@@ -39,7 +40,7 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
         <li><a href="/#{{ section.lower() }}">{{ section }}</a></li>
       {% endfor %}
       </ul>
-      {% block navigation %}{% endblock %}
+      {% block body_navigation %}{% endblock %}
     </div>
   </div>
 </nav>
