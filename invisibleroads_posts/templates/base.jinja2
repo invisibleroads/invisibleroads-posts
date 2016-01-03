@@ -11,7 +11,9 @@
 {% endblock %}</title>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 {% block head_style_loaded %}{% endblock %}
-<style>{% block head_style_inline %}{% endblock %}</style>
+<style>
+{% block head_style_inline %}{% endblock %}
+</style>
 <!--[if lt IE 9]>
 <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -25,25 +27,21 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
 </head>
 <body>
 <nav id="top-navbar" class="navbar navbar-default navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/#">{{ website_name }}</a>
-    </div>
-    <div id="top-navbar-collapse" class="navbar-collapse collapse">
-      <ul class="navbar-nav nav">
-      {% for section in website_sections %}
-        <li><a href="/#{{ section.lower() }}">{{ section }}</a></li>
-      {% endfor %}
-      </ul>
-      {% block body_navigation %}{% endblock %}
-    </div>
-  </div>
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse" aria-expanded="false">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/#">{{ website_name }}</a>
+</div>
+<div id="top-navbar-collapse" class="navbar-collapse collapse">
+<ul class="navbar-nav nav">{%- for section in website_sections %}<li><a href="/#{{ section.lower() }}">{{ section }}</a></li>{% endfor -%}</ul>
+{% block body_navigation %}{% endblock -%}
+</div>
+</div>
 </nav>
 {% block body_header %}{% endblock %}
 <div class="container-fluid">{% block body_content %}{% endblock %}</div>
@@ -55,6 +53,8 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
 {% block body_script_loaded %}
 <script src="{{ request.static_path('invisibleroads_posts:assets/base.js') }}"></script>
 {% endblock %}
-<script>{% block body_script_inline %}{% endblock %}</script>
+<script>
+{% block body_script_inline %}{% endblock %}
+</script>
 </body>
 </html>
