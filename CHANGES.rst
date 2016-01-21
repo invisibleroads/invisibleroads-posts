@@ -1,6 +1,7 @@
 0.4
 ---
-- Add meta description
+- Add page_description
+- Add render_confirmation_modal
 
 0.3
 ---

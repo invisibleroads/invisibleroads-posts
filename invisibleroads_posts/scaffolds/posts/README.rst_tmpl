@@ -21,12 +21,10 @@ Install project.
 
 Launch development server.
 
-    mkdir -p {{ package }}/assets
     bash refresh.sh -d
     pserve development.ini
 
 Launch production server.
 
-    mkdir -p {{ package }}/assets
     bash refresh.sh
     pserve production.ini
