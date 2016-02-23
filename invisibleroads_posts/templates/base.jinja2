@@ -51,7 +51,7 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap.min.js') }}">\x3C/script>')</script>
 {% block body_script_loaded %}
-<script src="{{ request.static_path('invisibleroads_posts:assets/base.js') }}"></script>
+<script src="{{ request.static_path('invisibleroads_posts:assets/library.js') }}"></script>
 {% endblock %}
 <script>
 {% block body_script_inline %}{% endblock %}
