@@ -10,17 +10,6 @@ posts = invisibleroads_posts.scaffolds:PostsTemplate
 [invisibleroads]
 initialize = invisibleroads_posts.scripts:InitializePostsScript
 """
-REQUIREMENTS = [
-    'pyramid',
-    'pyramid_debugtoolbar',
-    'waitress',
-] + [
-    'dogpile.cache',
-    'invisibleroads',
-    'invisibleroads_macros',
-    'pyramid_jinja2',
-    'titlecase',
-]
 FOLDER = dirname(abspath(__file__))
 DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
     'README.rst', 'CHANGES.rst'])
@@ -43,5 +32,18 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=REQUIREMENTS,
+    setup_requires=[
+        'invisibleroads',
+    ],
+    install_requires=[
+        'pyramid',
+        'pyramid_debugtoolbar',
+        'waitress',
+    ] + [
+        'dogpile.cache',
+        'invisibleroads',
+        'invisibleroads_macros',
+        'pyramid_jinja2',
+        'titlecase',
+    ],
     entry_points=ENTRY_POINTS)
