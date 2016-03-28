@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="${request.locale_name}">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{% block page_description %}{{ website_name }}{% endblock %}">
+<meta name="author" content="{{ website_author }}">
 <title>{% block page_title %}
 {% if request.path[1:] %} {{ render_title(request.path) }} &middot; {% endif %}
 {{ website_name }}
@@ -15,7 +16,7 @@
 {% block head_style_inline %}{% endblock %}
 </style>
 <!--[if lt IE 9]>
-<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <script>
@@ -46,10 +47,10 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
 {% block body_header %}{% endblock %}
 <div class="container-fluid">{% block body_content %}{% endblock %}</div>
 {% block body_footer %}{% endblock %}
-<script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.12.2.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/jquery.min.js') }}">\x3C/script>')</script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap.min.js') }}">\x3C/script>')</script>
+<script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap/js/bootstrap.min.js') }}">\x3C/script>')</script>
 {% block body_script_loaded %}
 <script src="{{ request.static_path('invisibleroads_posts:assets/library.js') }}"></script>
 {% endblock %}

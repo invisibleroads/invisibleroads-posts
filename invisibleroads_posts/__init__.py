@@ -1,7 +1,6 @@
-from importlib import import_module
-from os import getcwd
-from os.path import basename, isabs, join
+from os.path import basename
 from pyramid.config import Configurator
+from pyramid.path import AssetResolver
 from pyramid.response import FileResponse
 from pyramid.settings import aslist
 
@@ -24,15 +23,14 @@ def includeme(config):
 
 def configure_assets(config):
     settings = config.registry.settings
+    client_cache_http_expiration_time = int(settings.get(
+        'client_cache.http.expiration_time', 3600))
     config.add_directive('add_root_asset', add_root_asset)
-    for asset_path in aslist(settings.get('website.root_asset_paths', [])):
-        config.add_root_asset(asset_path)
+    for asset_spec in aslist(settings.get('website.root_assets', [])):
+        config.add_root_asset(asset_spec, client_cache_http_expiration_time)
     config.add_static_view(
         '_/invisibleroads-posts', 'invisibleroads_posts:assets',
-        cache_max_age=3600)
-    config.add_static_view(
-        '_/fonts', 'invisibleroads_posts:assets/fonts',
-        cache_max_age=3600)
+        cache_max_age=client_cache_http_expiration_time)
 
 
 def configure_views(config):
@@ -47,24 +45,8 @@ def configure_views(config):
     add_routes(config)
 
 
-def add_root_asset(config, asset_path, http_cache=3600):
-    settings = config.registry.settings
-    base_folder = settings.get('website.folder', getcwd())
-    absolute_path = resolve_asset_path(asset_path, base_folder)
-    asset_name = basename(absolute_path)
+def add_root_asset(config, asset_spec, http_cache):
+    asset_path = AssetResolver().resolve(asset_spec).abspath()
     config.add_view(
-        lambda request: FileResponse(absolute_path, request),
-        asset_name, http_cache=http_cache)
-
-
-def resolve_asset_path(asset_path, base_folder):
-    try:
-        package_name, relative_path = asset_path.split(':')
-    except ValueError:
-        absolute_path = asset_path if isabs(asset_path) else join(
-            base_folder, asset_path)
-    else:
-        package_module = import_module(package_name)
-        package_folder = package_module.__path__[0]
-        absolute_path = join(package_folder, relative_path)
-    return absolute_path
+        lambda request: FileResponse(asset_path, request),
+        basename(asset_path), http_cache=http_cache)

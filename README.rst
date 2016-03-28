@@ -2,9 +2,9 @@ InvisibleRoads Posts
 ====================
 Posts form the foundation for most of our web applications.
 
-- Pyramid_ 1.5.7
+- Pyramid_ 1.6.1
 - Bootstrap_ 3.3.6
-- JQuery_ 1.11.3
+- JQuery_ 1.12.2
 
 
 Use
@@ -86,7 +86,9 @@ Update configuration files. ::
 
 Update package files. ::
 
-    vimdiff ${TARGET_FOLDER}/invisibleroads_posts/__init__.py ${SOURCE_FOLDER}/invisibleroads_posts/__init__.py
+    vimdiff \
+        ${TARGET_FOLDER}/invisibleroads_posts/__init__.py \
+        ${SOURCE_FOLDER}/invisibleroads_posts/__init__.py
     vimdiff ${TARGET_FOLDER}/invisibleroads_posts/views.py ${SOURCE_FOLDER}/invisibleroads_posts/views.py
     rm ${TARGET_FOLDER}/invisibleroads_posts/tests.py
 
@@ -117,12 +119,14 @@ Add Bootstrap_. ::
     wget https://github.com/twbs/bootstrap/releases/download/v$BOOTSTRAP_VERSION/bootstrap-$BOOTSTRAP_VERSION-dist.zip
     unzip bootstrap-${BOOTSTRAP_VERSION}-dist.zip
     cd ~/Documents/bootstrap-${BOOTSTRAP_VERSION}-dist
-    cp css/bootstrap.min.css ${ASSETS_FOLDER}
-    cp js/bootstrap.min.js ${ASSETS_FOLDER}
+    mkdir -p ${ASSETS_FOLDER}/bootstrap/css
+    mkdir -p ${ASSETS_FOLDER}/bootstrap/js
+    cp css/bootstrap.min.css ${ASSETS_FOLDER}/bootstrap/css
+    cp js/bootstrap.min.js ${ASSETS_FOLDER}/bootstrap/js
 
 Add JQuery_. ::
 
-    JQUERY_VERSION=1.11.3
+    JQUERY_VERSION=1.12.2
     cd ${ASSETS_FOLDER}
     wget http://code.jquery.com/jquery-${JQUERY_VERSION}.min.js -O jquery.min.js
 

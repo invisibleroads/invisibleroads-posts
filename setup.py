@@ -15,7 +15,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
     'README.rst', 'CHANGES.rst'])
 setup(
     name='invisibleroads-posts',
-    version='0.4.6',
+    version='0.4.7',
     description='Web application defaults',
     long_description=DESCRIPTION,
     classifiers=[
@@ -33,7 +33,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     setup_requires=[
-        'invisibleroads',
+        'pytest-runner',
     ],
     install_requires=[
         'pyramid',
@@ -41,9 +41,12 @@ setup(
         'waitress',
     ] + [
         'dogpile.cache',
-        'invisibleroads',
-        'invisibleroads_macros',
+        'invisibleroads>=0.1.5',
+        'invisibleroads_macros>=0.6.7',
         'pyramid_jinja2',
         'titlecase',
+    ],
+    tests_require=[
+        'pytest',
     ],
     entry_points=ENTRY_POINTS)

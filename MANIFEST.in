@@ -1,2 +1,2 @@
-include *.ini *.rst
-recursive-include invisibleroads_posts *.html *.css *.js *.ico *.jinja2 *.ttf *.woff *.woff2 *.txt *_tmpl
+include *.cfg *.ini *.rst
+recursive-include invisibleroads_posts *.html *.css *.js *.ico *.jinja2 *.ttf *.woff *.woff2 *_tmpl
