@@ -20,16 +20,16 @@ Prepare environment. ::
 
 Install package. ::
 
-    PYTHON_PACKAGE_FOLDER=~/Projects/invisibleroads-packages/posts
-    NODE_PACKAGE_FOLDER=${PYTHON_PACKAGE_FOLDER}/node_modules/invisibleroads-posts
+    PYTHON_PACKAGE=~/Projects/invisibleroads-packages/posts
+    NODE_PACKAGE=${PYTHON_PACKAGE}/node_modules/invisibleroads-posts
 
     cd ~/Projects
     git clone git@github.com:invisibleroads/invisibleroads-posts.git
 
-    cd ${PYTHON_PACKAGE_FOLDER}
+    cd ${PYTHON_PACKAGE}
     python setup.py develop
 
-    cd ${NODE_PACKAGE_FOLDER}
+    cd ${NODE_PACKAGE}
     npm install -g
 
 Create project. ::
@@ -66,7 +66,8 @@ Use starter scaffold. ::
 
 Add .gitignore. ::
 
-    wget https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore -O ${TARGET_FOLDER}/.gitignore
+    wget https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore \
+        -O ${TARGET_FOLDER}/.gitignore
     vimdiff ${TARGET_FOLDER}/.gitignore ${SOURCE_FOLDER}/.gitignore
 
 Update configuration files. ::
@@ -89,7 +90,9 @@ Update package files. ::
     vimdiff \
         ${TARGET_FOLDER}/invisibleroads_posts/__init__.py \
         ${SOURCE_FOLDER}/invisibleroads_posts/__init__.py
-    vimdiff ${TARGET_FOLDER}/invisibleroads_posts/views.py ${SOURCE_FOLDER}/invisibleroads_posts/views.py
+    vimdiff \
+        ${TARGET_FOLDER}/invisibleroads_posts/views.py \
+        ${SOURCE_FOLDER}/invisibleroads_posts/views.py
     rm ${TARGET_FOLDER}/invisibleroads_posts/tests.py
 
 Prepare templates. ::
@@ -116,7 +119,7 @@ Add Bootstrap_. ::
 
     BOOTSTRAP_VERSION=3.3.6
     cd ~/Documents
-    wget https://github.com/twbs/bootstrap/releases/download/v$BOOTSTRAP_VERSION/bootstrap-$BOOTSTRAP_VERSION-dist.zip
+    wget https://github.com/twbs/bootstrap/releases/download/v${BOOTSTRAP_VERSION}/bootstrap-${BOOTSTRAP_VERSION}-dist.zip
     unzip bootstrap-${BOOTSTRAP_VERSION}-dist.zip
     cd ~/Documents/bootstrap-${BOOTSTRAP_VERSION}-dist
     mkdir -p ${ASSETS_FOLDER}/bootstrap/css
