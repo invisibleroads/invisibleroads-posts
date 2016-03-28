@@ -17,7 +17,7 @@ def main(global_config, **settings):
 
 def includeme(config):
     configure_assets(config)
-    configure_cache(config, FUNCTION_CACHE, 'cache.function.')
+    configure_cache(config, FUNCTION_CACHE, 'server_cache.function.')
     configure_views(config)
 
 
