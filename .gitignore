@@ -2,6 +2,7 @@
 .ipynb_checkpoints
 # Python
 *.egg-info
+*.eggs
 *.py[co]
 __pycache__
 build

@@ -117,11 +117,12 @@ Prepare assets. ::
 
 Add Bootstrap_. ::
 
-    BOOTSTRAP_VERSION=3.3.6
+    VERSION=3.3.6
+    URL=https://github.com/twbs/bootstrap/releases/download
     cd ~/Documents
-    wget https://github.com/twbs/bootstrap/releases/download/v${BOOTSTRAP_VERSION}/bootstrap-${BOOTSTRAP_VERSION}-dist.zip
-    unzip bootstrap-${BOOTSTRAP_VERSION}-dist.zip
-    cd ~/Documents/bootstrap-${BOOTSTRAP_VERSION}-dist
+    wget ${URL}/v${VERSION}/bootstrap-${VERSION}-dist.zip
+    unzip bootstrap-${VERSION}-dist.zip
+    cd ~/Documents/bootstrap-${VERSION}-dist
     mkdir -p ${ASSETS_FOLDER}/bootstrap/css
     mkdir -p ${ASSETS_FOLDER}/bootstrap/js
     cp css/bootstrap.min.css ${ASSETS_FOLDER}/bootstrap/css
@@ -129,9 +130,9 @@ Add Bootstrap_. ::
 
 Add JQuery_. ::
 
-    JQUERY_VERSION=1.12.2
+    VERSION=1.12.2
     cd ${ASSETS_FOLDER}
-    wget http://code.jquery.com/jquery-${JQUERY_VERSION}.min.js -O jquery.min.js
+    wget http://code.jquery.com/jquery-${VERSION}.min.js -O jquery.min.js
 
 
 .. _Pyramid: http://docs.pylonsproject.org/en/latest/docs/pyramid.html
