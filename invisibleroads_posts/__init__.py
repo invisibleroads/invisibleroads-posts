@@ -23,14 +23,13 @@ def includeme(config):
 
 def configure_assets(config):
     settings = config.registry.settings
-    client_cache_http_expiration_time = int(settings.get(
-        'client_cache.http.expiration_time', 3600))
-    config.add_directive('add_root_asset', add_root_asset)
+    config.add_directive('add_root_asset', _add_root_asset)
+    http_expiration_time = get_http_expiration_time(settings)
     for asset_spec in aslist(settings.get('website.root_assets', [])):
-        config.add_root_asset(asset_spec, client_cache_http_expiration_time)
+        config.add_root_asset(asset_spec, http_expiration_time)
     config.add_static_view(
         '_/invisibleroads-posts', 'invisibleroads_posts:assets',
-        cache_max_age=client_cache_http_expiration_time)
+        cache_max_age=http_expiration_time)
 
 
 def configure_views(config):
@@ -45,7 +44,11 @@ def configure_views(config):
     add_routes(config)
 
 
-def add_root_asset(config, asset_spec, http_cache):
+def get_http_expiration_time(settings):
+    return int(settings.get('client_cache.http.expiration_time', 3600))
+
+
+def _add_root_asset(config, asset_spec, http_cache):
     asset_path = AssetResolver().resolve(asset_spec).abspath()
     config.add_view(
         lambda request: FileResponse(asset_path, request),
