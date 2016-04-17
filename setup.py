@@ -6,7 +6,7 @@ ENTRY_POINTS = """
 [paste.app_factory]
 main = invisibleroads_posts:main
 [pyramid.scaffold]
-posts = invisibleroads_posts.scaffolds:PostsTemplate
+ir-posts = invisibleroads_posts.scaffolds:PostsTemplate
 [invisibleroads]
 initialize = invisibleroads_posts.scripts:InitializePostsScript
 """
