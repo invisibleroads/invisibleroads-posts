@@ -2,8 +2,6 @@
 
 {% block body_content %}
 {% for section in website_sections %}
-<div id="{{ section.lower() }}">
-  <h2>{{ section }}</h2>
-</div>
+<div id="{{ section.lower() }}"><h2>{{ section }}</h2></div>
 {% endfor %}
 {% endblock %}
