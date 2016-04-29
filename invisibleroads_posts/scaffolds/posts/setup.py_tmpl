@@ -22,7 +22,7 @@ setup(
     author='',
     author_email='',
     url='',
-    keywords='web pyramid pylons invisibleroads',
+    keywords='web wsgi bfg pylons pyramid invisibleroads',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
@@ -30,7 +30,7 @@ setup(
         'pytest-runner',
     ],
     install_requires=[
-        'invisibleroads_posts>=0.4.7',
+        'invisibleroads_posts>=0.4.8',
     ],
     tests_require=[
         'pytest',

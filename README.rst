@@ -16,7 +16,7 @@ Prepare environment. ::
     source ${VIRTUAL_ENV}/bin/activate
 
     export NODE_PATH=${VIRTUAL_ENV}/lib/node_modules
-    npm install -g browserify uglify-js
+    npm install -g uglify-js
 
 Install package. ::
 
@@ -29,9 +29,6 @@ Install package. ::
     cd ${PYTHON_PACKAGE}
     python setup.py develop
 
-    cd ${NODE_PACKAGE}
-    npm install -g
-
 Create project. ::
 
     cd ~/Projects
@@ -41,17 +38,14 @@ Install project. ::
 
     cd ~/Projects/xyz
     python setup.py develop
+    bash refresh.sh
 
 Launch development server. ::
 
-    mkdir -p xyz/assets
-    bash refresh.sh -d
     pserve development.ini
 
 Launch production server. ::
 
-    mkdir -p xyz/assets
-    bash refresh.sh
     pserve production.ini
 
 

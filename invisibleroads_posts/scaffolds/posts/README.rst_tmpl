@@ -1,6 +1,6 @@
 {{ project }}
 =============
-- [InvisibleRoads Posts](https://github.com/invisibleroads/invisibleroads-posts) 0.4.7
+- [InvisibleRoads Posts](https://github.com/invisibleroads/invisibleroads-posts) 0.4.8
 
 
 Use
@@ -12,19 +12,18 @@ Prepare environment. ::
     source ${VIRTUAL_ENV}/bin/activate
 
     export NODE_PATH=${VIRTUAL_ENV}/lib/node_modules
-    npm install -g browserify uglify-js
+    npm install -g uglify-js
 
 Install package. ::
 
     cd ~/Projects/{{ project }}
+    bash refresh.sh
     python setup.py develop
 
 Launch development server. ::
 
-    bash refresh.sh -d
     pserve development.ini
 
 Launch production server. ::
 
-    bash refresh.sh
     pserve production.ini
