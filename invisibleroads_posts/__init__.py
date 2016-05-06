@@ -54,7 +54,7 @@ def configure_views(config):
 
 
 def add_fused_asset_view(config, view_name, setting_key):
-    print('Generating %s...' % view_name)
+    print('Generating %s' % view_name)
     settings = config.registry.settings
     http_expiration_time = get_http_expiration_time(settings)
     content_type = mimetypes.guess_type(view_name)[0]
