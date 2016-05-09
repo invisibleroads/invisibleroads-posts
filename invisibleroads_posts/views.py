@@ -1,7 +1,7 @@
+import simplejson as json
 from os.path import exists, join
+from pyramid.httpexceptions import HTTPBadRequest
 from pyramid.response import FileResponse
-
-from .exceptions import HTTPBadRequestJSON
 
 
 def add_routes(config):
@@ -9,6 +9,7 @@ def add_routes(config):
     config.add_view(
         list_posts, renderer='invisibleroads_posts:templates/posts.jinja2',
         route_name='index')
+    config.add_view(is_bad_request, context=HTTPBadRequest)
 
 
 def list_posts(request):
@@ -23,4 +24,12 @@ def expect_param(key, params):
     try:
         return params[key]
     except KeyError:
-        raise HTTPBadRequestJSON({key: 'required'})
+        raise HTTPBadRequest({key: 'required'})
+
+
+def is_bad_request(context, request):
+    response = request.response
+    response.body = json.dumps(context.detail)
+    response.status_int = context.status_int
+    response.content_type = 'application/json'
+    return response

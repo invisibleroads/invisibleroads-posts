@@ -1,3 +1,4 @@
+import logging
 import mimetypes
 from invisibleroads_macros.iterable import OrderedSet
 from os.path import basename, exists
@@ -9,6 +10,9 @@ from pyramid.settings import aslist
 from .libraries.cache import configure_cache, FUNCTION_CACHE
 from .libraries.text import render_title
 from .views import add_routes
+
+
+LOG = logging.getLogger(__name__)
 
 
 def main(global_config, **settings):
@@ -37,8 +41,8 @@ def configure_assets(config):
             lambda request, x=asset_path: FileResponse(x, request),
             asset_name, http_cache=http_expiration_time)
     # Add fused assets
-    add_fused_asset_view(config, 'site.min.css', 'website.style_assets')
-    add_fused_asset_view(config, 'site.min.js', 'website.script_assets')
+    add_fused_asset_view(config, 'site.min.css')
+    add_fused_asset_view(config, 'site.min.js')
 
 
 def configure_views(config):
@@ -53,22 +57,22 @@ def configure_views(config):
     add_routes(config)
 
 
-def add_fused_asset_view(config, view_name, setting_key):
-    print('Generating %s' % view_name)
+def add_fused_asset_view(config, view_name):
+    LOG.debug('Generating %s' % view_name)
     settings = config.registry.settings
-    http_expiration_time = get_http_expiration_time(settings)
-    content_type = mimetypes.guess_type(view_name)[0]
+    file_name = view_name.replace('site', 'part')
     asset_parts = []
-    for asset_spec in OrderedSet(aslist(settings.get(setting_key, []))):
-        if not asset_spec:
-            continue
+    for package_name in OrderedSet(aslist(settings['website.dependencies'])):
+        asset_spec = '%s:assets/%s' % (package_name, file_name)
         asset_path = get_asset_path(asset_spec)
         if not exists(asset_path):
-            print('_ %s' % asset_spec)
+            LOG.debug('_ %s' % asset_spec)
             continue
         asset_parts.append(open(asset_path).read().strip())
-        print('+ %s' % asset_spec)
+        LOG.debug('+ %s' % asset_spec)
     asset_content = '\n'.join(asset_parts)
+    content_type = mimetypes.guess_type(view_name)[0]
+    http_expiration_time = get_http_expiration_time(settings)
     config.add_view(
         lambda request: Response(asset_content, content_type=content_type),
         view_name, http_cache=http_expiration_time)

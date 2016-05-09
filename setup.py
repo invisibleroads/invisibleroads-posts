@@ -44,6 +44,7 @@ setup(
         'invisibleroads>=0.1.5',
         'invisibleroads_macros>=0.6.7',
         'pyramid_jinja2',
+        'simplejson',
         'titlecase',
     ],
     tests_require=[
