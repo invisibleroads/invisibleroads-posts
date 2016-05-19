@@ -41,8 +41,8 @@ setup(
         'waitress',
     ] + [
         'dogpile.cache',
-        'invisibleroads>=0.1.5',
-        'invisibleroads_macros>=0.6.7',
+        'invisibleroads>=0.1.6',
+        'invisibleroads_macros>=0.6.8',
         'pyramid_jinja2',
         'simplejson',
         'titlecase',
