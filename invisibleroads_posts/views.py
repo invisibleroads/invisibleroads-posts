@@ -29,7 +29,7 @@ def expect_param(key, params):
 
 def is_bad_request(context, request):
     response = request.response
-    response.body = json.dumps(context.detail)
+    response.body = json.dumps(context.detail).encode('utf-8')
     response.status_int = context.status_int
     response.content_type = 'application/json'
     return response
