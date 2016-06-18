@@ -74,7 +74,8 @@ def add_fused_asset_view(config, view_name):
     content_type = mimetypes.guess_type(view_name)[0]
     http_expiration_time = get_http_expiration_time(settings)
     config.add_view(
-        lambda request: Response(asset_content, content_type=content_type),
+        lambda request: Response(
+            asset_content, content_type=content_type, charset='utf-8'),
         view_name, http_cache=http_expiration_time)
 
 

@@ -2,6 +2,7 @@
 ---
 - Add page_description
 - Add render_confirmation_modal
+- Fix Python 3 compatibility
 
 0.3
 ---
