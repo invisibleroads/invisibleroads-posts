@@ -62,7 +62,8 @@ def add_fused_asset_view(config, view_name):
     settings = config.registry.settings
     file_name = view_name.replace('site', 'part')
     asset_parts = []
-    for package_name in OrderedSet(aslist(settings['website.dependencies'])):
+    for package_name in OrderedSet(aslist(
+            settings.get('website.dependencies', []))):
         asset_spec = '%s:assets/%s' % (package_name, file_name)
         asset_path = get_asset_path(asset_spec)
         if not exists(asset_path):
