@@ -41,8 +41,9 @@ def configure_assets(config):
             lambda request, x=asset_path: FileResponse(x, request),
             asset_name, http_cache=http_expiration_time)
     # Add fused assets
-    add_fused_asset_view(config, 'site.min.css')
-    add_fused_asset_view(config, 'site.min.js')
+    package_names = get_package_names(config)
+    add_fused_asset_view(config, package_names, 'site.min.css')
+    add_fused_asset_view(config, package_names, 'site.min.js')
 
 
 def configure_views(config):
@@ -57,13 +58,12 @@ def configure_views(config):
     add_routes(config)
 
 
-def add_fused_asset_view(config, view_name):
+def add_fused_asset_view(config, package_names, view_name):
     LOG.debug('Generating %s' % view_name)
     settings = config.registry.settings
     file_name = view_name.replace('site', 'part')
     asset_parts = []
-    for package_name in OrderedSet(aslist(
-            settings.get('website.dependencies', []))):
+    for package_name in package_names:
         asset_spec = '%s:assets/%s' % (package_name, file_name)
         asset_path = get_asset_path(asset_spec)
         if not exists(asset_path):
@@ -78,6 +78,13 @@ def add_fused_asset_view(config, view_name):
         lambda request: Response(
             asset_content, content_type=content_type, charset='utf-8'),
         view_name, http_cache=http_expiration_time)
+
+
+def get_package_names(config):
+    settings = config.registry.settings
+    package_names = aslist(settings.get('website.dependencies', []))
+    package_names.append(config.root_package.__name__)
+    return OrderedSet(package_names)
 
 
 def get_asset_path(asset_spec):
