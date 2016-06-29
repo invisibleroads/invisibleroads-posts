@@ -36,7 +36,7 @@ setup(
         'pytest-runner',
     ],
     install_requires=[
-        'pyramid',
+        'pyramid>=1.6.0',
         'pyramid_debugtoolbar',
         'waitress',
     ] + [
