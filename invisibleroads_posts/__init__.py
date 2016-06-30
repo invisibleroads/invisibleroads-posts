@@ -18,6 +18,7 @@ LOG = logging.getLogger(__name__)
 def main(global_config, **settings):
     config = Configurator(settings=settings)
     includeme(config)
+    add_routes_for_fused_assets(config)
     return config.make_wsgi_app()
 
 
@@ -29,21 +30,17 @@ def includeme(config):
 
 def configure_assets(config):
     settings = config.registry.settings
+    settings['website.dependencies'] = [config.package_name]
     http_expiration_time = get_http_expiration_time(settings)
     config.add_static_view(
         '_/invisibleroads-posts', 'invisibleroads_posts:assets',
         cache_max_age=http_expiration_time)
-    # Add root assets
     for asset_spec in aslist(settings.get('website.root_assets', [])):
         asset_path = get_asset_path(asset_spec)
         asset_name = basename(asset_path)
         config.add_view(
             lambda request, x=asset_path: FileResponse(x, request),
             asset_name, http_cache=http_expiration_time)
-    # Add fused assets
-    package_names = get_package_names(config)
-    add_fused_asset_view(config, package_names, 'site.min.css')
-    add_fused_asset_view(config, package_names, 'site.min.js')
 
 
 def configure_views(config):
@@ -56,6 +53,14 @@ def configure_views(config):
         'render_title': render_title,
     })
     add_routes(config)
+
+
+def add_routes_for_fused_assets(config):
+    settings = config.registry.settings
+    package_names = OrderedSet(settings['website.dependencies'] + [
+        config.root_package.__name__])
+    add_fused_asset_view(config, package_names, 'site.min.css')
+    add_fused_asset_view(config, package_names, 'site.min.js')
 
 
 def add_fused_asset_view(config, package_names, view_name):
@@ -78,13 +83,6 @@ def add_fused_asset_view(config, package_names, view_name):
         lambda request: Response(
             asset_content, content_type=content_type, charset='utf-8'),
         view_name, http_cache=http_expiration_time)
-
-
-def get_package_names(config):
-    settings = config.registry.settings
-    package_names = aslist(settings.get('website.dependencies', []))
-    package_names.append(config.root_package.__name__)
-    return OrderedSet(package_names)
 
 
 def get_asset_path(asset_spec):

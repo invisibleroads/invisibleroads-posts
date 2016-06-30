@@ -1,4 +1,5 @@
 from invisibleroads_posts import get_http_expiration_time
+from invisibleroads_posts.views import add_routes_for_fused_assets
 from pyramid.config import Configurator
 
 from .views import add_routes
@@ -18,3 +19,4 @@ def includeme(config):
         '_/{{ project }}', '{{ package }}:assets',
         cache_max_age=http_expiration_time)
     add_routes(config)
+    add_routes_for_fused_assets(config)

@@ -41,13 +41,13 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
 <a class="navbar-brand" href="/#">{% block body_brand %}{{ website_name }}{% endblock %}</a>
 </div>
 <div id="top-navbar-collapse" class="navbar-collapse collapse">
-<ul class="navbar-nav nav">{%- for section in website_sections %}<li><a href="/#{{ section.lower() }}">{{ section }}</a></li>{% endfor -%}</ul>
+<ul class="nav navbar-nav">{%- for section in website_sections %}<li><a href="/#{{ section.lower() }}">{{ section }}</a></li>{% endfor -%}</ul>
 {% block body_navigation %}{% endblock -%}
 </div>
 </div>
 </nav>
 {% block body_header %}{% endblock %}
-<div class="container-fluid">{% block body_content %}{% endblock %}</div>
+<div class="container">{% block body_content %}{% endblock %}</div>
 {% block body_footer %}{% endblock %}
 <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/jquery.min.js') }}">\x3C/script>')</script>
