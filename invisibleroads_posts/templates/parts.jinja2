@@ -1,14 +1,23 @@
-{% macro render_confirmation_modal(modal_id, modal_title) %}
+{% macro navigation_links(request_path, link_names, list_class) %}
+<ul class="nav navbar-nav {{ list_class }}">
+{% for name in link_names %}
+{% set path = '/' + name %}
+<li {% if request_path == path %}class="active"{% endif %}><a href="{{ path }}">{{ name.title() }}</a></li>
+{% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro confirmation_modal(modal_id, modal_title) %}
 <div class="modal fade" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="{{ modal_id }}-title">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header"><h4 class="modal-title" id="{{ modal_id }}-title">{{ modal_title }}</h4></div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"></button>
-        <button type="button" class="btn btn-primary"></button>
-      </div>
-    </div>
-  </div>
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header"><h4 class="modal-title" id="{{ modal_id }}-title">{{ modal_title }}</h4></div>
+<div class="modal-body"></div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal"></button>
+<button type="button" class="btn btn-primary"></button>
+</div>
+</div>
+</div>
 </div>
 {% endmacro %}

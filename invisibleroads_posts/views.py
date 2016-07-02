@@ -4,6 +4,7 @@ from pyramid.httpexceptions import HTTPBadRequest
 
 def add_routes(config):
     config.add_route('index', '')
+
     config.add_view(
         renderer='invisibleroads_posts:templates/posts.jinja2',
         route_name='index')

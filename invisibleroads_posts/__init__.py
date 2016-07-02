@@ -49,6 +49,7 @@ def configure_views(config):
     config.commit()
     config.get_jinja2_environment().globals.update({
         'website_name': settings.get('website.name', 'InvisibleRoads'),
+        'website_author': settings.get('website.author', 'InvisibleRoads'),
         'render_title': render_title,
     })
     add_routes(config)
@@ -86,7 +87,7 @@ def add_fused_asset_view(config, package_names, view_name):
     config.add_view(
         lambda request: Response(
             asset_content, content_type=content_type, charset='utf-8'),
-        view_name, http_cache=http_expiration_time)
+        name=view_name, http_cache=http_expiration_time)
 
 
 def get_asset_path(asset_spec):
