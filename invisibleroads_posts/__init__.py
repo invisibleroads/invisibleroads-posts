@@ -49,7 +49,6 @@ def configure_views(config):
     config.commit()
     config.get_jinja2_environment().globals.update({
         'website_name': settings.get('website.name', 'InvisibleRoads'),
-        'website_sections': aslist(settings.get('website.sections', '')),
         'render_title': render_title,
     })
     add_routes(config)

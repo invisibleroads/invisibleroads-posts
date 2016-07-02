@@ -40,10 +40,7 @@ v.assets_url = "{{ request.static_path('invisibleroads_posts:assets/') }}";
 </button>
 <a class="navbar-brand" href="/#">{% block body_brand %}{{ website_name }}{% endblock %}</a>
 </div>
-<div id="top-navbar-collapse" class="navbar-collapse collapse">
-<ul class="nav navbar-nav">{%- for section in website_sections %}<li><a href="/#{{ section.lower() }}">{{ section }}</a></li>{% endfor -%}</ul>
-{% block body_navigation %}{% endblock -%}
-</div>
+<div id="top-navbar-collapse" class="navbar-collapse collapse">{% block body_navigation %}{% endblock -%}</div>
 </div>
 </nav>
 {% block body_header %}{% endblock %}
