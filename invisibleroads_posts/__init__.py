@@ -63,6 +63,11 @@ def add_routes_for_fused_assets(config):
 
 
 def add_fused_asset_view(config, package_names, view_name):
+    """
+    Prepare view for asset that is assembled from many parts.
+
+    Call this function AFTER including your pyramid configuration callables.
+    """
     LOG.debug('Generating %s' % view_name)
     settings = config.registry.settings
     file_name = view_name.replace('site', 'part')
