@@ -1,12 +1,12 @@
-# IPython Notebook
-.ipynb_checkpoints
 # Python
-*.egg-info
-*.eggs
+*.egg*
 *.py[co]
 __pycache__
+.ipynb_checkpoints
 build
 dist
+# Sass
+.sass-cache
 # SQLite
 *.db
 *.db-journal
