@@ -49,7 +49,7 @@ def configure_views(config):
     config.commit()
     config.get_jinja2_environment().globals.update({
         'website_name': settings.get('website.name', 'InvisibleRoads'),
-        'website_author': settings.get('website.author', 'InvisibleRoads'),
+        'website_owner': settings.get('website.owner', 'InvisibleRoads'),
         'render_title': render_title,
     })
     add_routes(config)
