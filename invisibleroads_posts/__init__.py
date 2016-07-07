@@ -1,7 +1,7 @@
 import logging
 import mimetypes
 from invisibleroads_macros.iterable import OrderedSet
-from os.path import basename, exists
+from os.path import abspath, basename, exists
 from pyramid.config import Configurator
 from pyramid.path import AssetResolver
 from pyramid.response import FileResponse, Response
@@ -91,7 +91,11 @@ def add_fused_asset_view(config, package_names, view_name):
 
 
 def get_asset_path(asset_spec):
-    return AssetResolver().resolve(asset_spec).abspath()
+    if ':' in asset_spec:
+        asset_path = AssetResolver().resolve(asset_spec).abspath()
+    else:
+        asset_path = abspath(asset_spec)
+    return asset_path
 
 
 def get_http_expiration_time(settings):

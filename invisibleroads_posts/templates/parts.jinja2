@@ -1,10 +1,14 @@
-{% macro navigation_links(request_path, link_names, list_class) %}
+{% macro navigation_list(request_path, link_names, list_class) %}
 <ul class="nav navbar-nav {{ list_class }}">
-{% for name in link_names %}
-{% set path = '/' + name %}
-<li {% if request_path == path %}class="active"{% endif %}><a href="{{ path }}">{{ name.title() }}</a></li>
-{% endfor %}
+{{ navigation_links(request_path, link_names) -}}
 </ul>
+{% endmacro %}
+
+{% macro navigation_links(request_path, link_names) %}
+{% for link_name in link_names %}
+{% set link_path = '/' + link_name.lower() %}
+<li{% if request_path == link_path %} class="active"{% endif %}><a href="{{ link_path }}">{{ link_name }}</a></li>
+{% endfor %}
 {% endmacro %}
 
 {% macro confirmation_modal(modal_id, modal_title) %}
