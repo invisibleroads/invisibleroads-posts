@@ -1,4 +1,5 @@
-{% extends 'invisibleroads_posts:templates/base.jinja2' %}
+{% set settings = request.registry.settings %}
+{% extends settings['posts.base_template'] %}
 
 {% block body_content %}
 You made it!

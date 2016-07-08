@@ -1,7 +1,7 @@
 import logging
 import mimetypes
 from invisibleroads_macros.iterable import OrderedSet
-from os.path import basename, exists
+from os.path import abspath, basename, exists
 from pyramid.config import Configurator
 from pyramid.path import AssetResolver
 from pyramid.response import FileResponse, Response
@@ -23,24 +23,39 @@ def main(global_config, **settings):
 
 
 def includeme(config):
+    configure_settings(config)
     configure_cache(config, FUNCTION_CACHE, 'server_cache.function.')
     configure_assets(config)
     configure_views(config)
 
 
+def configure_settings(config):
+    settings = config.registry.settings
+
+    settings['client_cache.http.expiration_time'] = http_expiration_time = int(
+        settings.get('client_cache.http.expiration_time', 3600))
+    config.add_directive(
+        'add_cached_static_view',
+        lambda config, *arguments, **keywords: config.add_static_view(
+            *arguments, cache_max_age=http_expiration_time, **keywords))
+    config.add_directive(
+        'add_cached_view',
+        lambda config, *arguments, **keywords: config.add_view(
+            *arguments, http_cache=http_expiration_time, **keywords))
+
+    settings['website.dependencies'] = settings.get(
+        'website.dependencies', []) + [config.package_name]
+
+
 def configure_assets(config):
     settings = config.registry.settings
-    settings['website.dependencies'] = [config.package_name]
-    http_expiration_time = get_http_expiration_time(settings)
-    config.add_static_view(
-        '_/invisibleroads-posts', 'invisibleroads_posts:assets',
-        cache_max_age=http_expiration_time)
+    config.add_cached_static_view(
+        '_/invisibleroads-posts', 'invisibleroads_posts:assets')
     for asset_spec in aslist(settings.get('website.root_assets', [])):
         asset_path = get_asset_path(asset_spec)
         asset_name = basename(asset_path)
-        config.add_view(
-            lambda request, x=asset_path: FileResponse(x, request),
-            asset_name, http_cache=http_expiration_time)
+        config.add_cached_view(
+            lambda request, x=asset_path: FileResponse(x, request), asset_name)
 
 
 def configure_views(config):
@@ -66,11 +81,9 @@ def add_routes_for_fused_assets(config):
 def add_fused_asset_view(config, package_names, view_name):
     """
     Prepare view for asset that is assembled from many parts.
-
     Call this function AFTER including your pyramid configuration callables.
     """
     LOG.debug('Generating %s' % view_name)
-    settings = config.registry.settings
     file_name = view_name.replace('site', 'part')
     asset_parts = []
     for package_name in package_names:
@@ -83,16 +96,15 @@ def add_fused_asset_view(config, package_names, view_name):
         LOG.debug('+ %s' % asset_spec)
     asset_content = '\n'.join(asset_parts)
     content_type = mimetypes.guess_type(view_name)[0]
-    http_expiration_time = get_http_expiration_time(settings)
-    config.add_view(
+    config.add_cached_view(
         lambda request: Response(
             asset_content, content_type=content_type, charset='utf-8'),
-        name=view_name, http_cache=http_expiration_time)
+        name=view_name)
 
 
 def get_asset_path(asset_spec):
-    return AssetResolver().resolve(asset_spec).abspath()
-
-
-def get_http_expiration_time(settings):
-    return int(settings.get('client_cache.http.expiration_time', 3600))
+    if ':' in asset_spec:
+        asset_path = AssetResolver().resolve(asset_spec).abspath()
+    else:
+        asset_path = abspath(asset_spec)
+    return asset_path
