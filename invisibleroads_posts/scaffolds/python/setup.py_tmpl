@@ -1,0 +1,33 @@
+from os.path import abspath, dirname, join
+from setuptools import find_packages, setup
+
+
+ENTRY_POINTS = """
+"""
+FOLDER = dirname(abspath(__file__))
+DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
+    'README.rst', 'CHANGES.rst'])
+setup(
+    name='{{ project }}',
+    version='0.1.0',
+    description='{{ project }}',
+    long_description=DESCRIPTION,
+    classifiers=[
+        'Programming Language :: Python',
+    ],
+    author='',
+    author_email='',
+    url='',
+    keywords='',
+    packages=find_packages(),
+    include_package_data=True,
+    zip_safe=False,
+    setup_requires=[
+        'pytest-runner',
+    ],
+    install_requires=[
+    ],
+    tests_require=[
+        'pytest',
+    ],
+    entry_points=ENTRY_POINTS)
