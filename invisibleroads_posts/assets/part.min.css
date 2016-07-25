@@ -1,11 +1,11 @@
-.card {
+.card-lg {
   margin-top: 7em;
   margin-bottom: 7em; }
 
-.font-big {
+.font-lg {
   font-size: 300%; }
 
-.font-huge {
+.font-xl {
   font-size: 700%; }
 
 .jumbotron {
@@ -36,11 +36,11 @@
   .spotlight {
     width: 100%; }
 
-  .font-big {
+  .font-lg {
     font-size: 200%; }
 
   #navbar-bottom p {
     padding-left: 15px; } }
 @media (max-width: 480px) {
-  .font-big {
+  .font-lg {
     font-size: 100%; } }
