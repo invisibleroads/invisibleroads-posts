@@ -1,8 +1,8 @@
 # Python
 *.egg*
 *.py[co]
-__pycache__
 .ipynb_checkpoints
+__pycache__
 build
 dist
 # Sass
