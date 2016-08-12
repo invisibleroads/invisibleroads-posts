@@ -43,8 +43,8 @@ def configure_settings(config):
         lambda config, *arguments, **keywords: config.add_view(
             *arguments, http_cache=http_expiration_time, **keywords))
 
-    settings['website.dependencies'] = settings.get(
-        'website.dependencies', []) + [config.package_name]
+    settings['website.dependencies'] = aslist(settings.get(
+        'website.dependencies', [])) + [config.package_name]
 
 
 def configure_assets(config):
@@ -72,8 +72,8 @@ def configure_views(config):
 
 def add_routes_for_fused_assets(config):
     settings = config.registry.settings
-    package_names = OrderedSet(settings['website.dependencies'] + [
-        config.root_package.__name__])
+    package_names = [x.split('.')[0] for x in OrderedSet(
+        settings['website.dependencies'] + [config.root_package.__name__])]
     add_fused_asset_view(config, package_names, 'site.min.css')
     add_fused_asset_view(config, package_names, 'site.min.js')
 
