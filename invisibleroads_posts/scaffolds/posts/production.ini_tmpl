@@ -4,6 +4,7 @@ data.folder = %(here)s/data_production
 
 website.name = {{ project }}
 website.owner = InvisibleRoads
+website.base_template = invisibleroads_posts:templates/base.jinja2
 # Specify assets to be available at the root URL
 website.root_assets =
     invisibleroads_posts:assets/favicon.ico
@@ -14,9 +15,6 @@ client_cache.http.expiration_time = 3600
 server_cache.function.backend = dogpile.cache.memory
 server_cache.function.expiration_time = 3600
 
-jinja2.lstrip_blocks = true
-jinja2.trim_blocks = true
-
 pyramid.reload_templates = false
 pyramid.prevent_http_cache = false
 pyramid.debug_authorization = false
@@ -24,6 +22,9 @@ pyramid.debug_notfound = false
 pyramid.debug_routematch = false
 pyramid.default_locale_name = en
 pyramid.includes =
+
+jinja2.lstrip_blocks = true
+jinja2.trim_blocks = true
 
 [server:main]
 use = egg:waitress#main
