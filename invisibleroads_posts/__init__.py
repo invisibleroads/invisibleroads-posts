@@ -1,6 +1,6 @@
 import logging
 import mimetypes
-from invisibleroads_macros.iterable import OrderedSet
+from invisibleroads_macros.iterable import OrderedSet, set_default
 from os.path import abspath, basename, exists
 from pyramid.config import Configurator
 from pyramid.path import AssetResolver
@@ -31,9 +31,8 @@ def includeme(config):
 
 def configure_settings(config):
     settings = config.registry.settings
-
-    settings['client_cache.http.expiration_time'] = http_expiration_time = int(
-        settings.get('client_cache.http.expiration_time', 3600))
+    http_expiration_time = set_default(
+        settings, 'client_cache.http.expiration_time', 3600, int)
     config.add_directive(
         'add_cached_static_view',
         lambda config, *arguments, **keywords: config.add_static_view(
@@ -42,9 +41,8 @@ def configure_settings(config):
         'add_cached_view',
         lambda config, *arguments, **keywords: config.add_view(
             *arguments, http_cache=http_expiration_time, **keywords))
-
-    settings['website.dependencies'] = aslist(settings.get(
-        'website.dependencies', [])) + [config.package_name]
+    set_default(settings, 'website.dependencies', [], aslist)
+    settings['website.dependencies'].append(config.package_name)
 
 
 def configure_assets(config):
