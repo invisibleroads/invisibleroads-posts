@@ -31,6 +31,7 @@ def includeme(config):
 
 def configure_settings(config):
     settings = config.registry.settings
+
     http_expiration_time = set_default(
         settings, 'client_cache.http.expiration_time', 3600, int)
     config.add_directive(
@@ -41,6 +42,7 @@ def configure_settings(config):
         'add_cached_view',
         lambda config, *arguments, **keywords: config.add_view(
             *arguments, http_cache=http_expiration_time, **keywords))
+
     set_default(settings, 'website.dependencies', [], aslist)
     settings['website.dependencies'].append(config.package_name)
 

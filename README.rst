@@ -27,26 +27,26 @@ Install package. ::
     git clone git@github.com:invisibleroads/invisibleroads-posts.git
 
     cd ${PYTHON_PACKAGE}
-    python setup.py develop
+    ${VIRTUAL_ENV}/bin/pip install -e .
 
 Create project. ::
 
     cd ~/Projects
-    pcreate -s posts xyz
+    ${VIRTUAL_ENV}/bin/pcreate -s ir-posts xyz
 
 Install project. ::
 
     cd ~/Projects/xyz
-    python setup.py develop
+    ${VIRTUAL_ENV}/bin/pip install -e .
     bash refresh.sh
 
 Launch development server. ::
 
-    pserve development.ini
+    ${VIRTUAL_ENV}/bin/pserve development.ini
 
 Launch production server. ::
 
-    pserve production.ini
+    ${VIRTUAL_ENV}/bin/pserve production.ini
 
 
 Recreate
@@ -54,7 +54,7 @@ Recreate
 Use starter scaffold. ::
 
     cd ~/Experiments
-    pcreate -s starter invisibleroads-posts
+    ${VIRTUAL_ENV}/bin/pcreate -s starter invisibleroads-posts
     SOURCE_FOLDER=~/Projects/invisibleroads-posts
     TARGET_FOLDER=~/Experiments/invisibleroads-posts
 
