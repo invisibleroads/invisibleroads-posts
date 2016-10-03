@@ -43,7 +43,7 @@ setup(
     ] + [
         'dogpile.cache',
         'invisibleroads>=0.1.6',
-        'invisibleroads_macros>=0.6.9',
+        'invisibleroads_macros>=0.7.1',
         'pyramid_jinja2',
         'simplejson',
         'titlecase',
