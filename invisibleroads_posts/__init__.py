@@ -65,6 +65,7 @@ def configure_views(config):
     config.get_jinja2_environment().globals.update({
         'website_name': settings.get('website.name', 'InvisibleRoads'),
         'website_owner': settings.get('website.owner', 'InvisibleRoads'),
+        'website_url': settings.get('website.url', '/#'),
         'base_template': settings.get(
             'website.base_template',
             'invisibleroads_posts:templates/base.jinja2'),

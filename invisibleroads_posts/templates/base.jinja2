@@ -39,7 +39,7 @@ x.website_owner = '{{ website_owner }}';
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" href="/#">{% block body_brand %}{{ website_name }}{% endblock %}</a>
+<a class="navbar-brand" href="{{ website_url }}">{% block body_brand %}{{ website_name }}{% endblock %}</a>
 </div>
 <div id="navbar-collapse-top" class="navbar-collapse collapse">
 {% block body_navigation_top %}{% endblock -%}
