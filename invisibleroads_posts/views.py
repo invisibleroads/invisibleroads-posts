@@ -17,11 +17,17 @@ def add_routes(config):
     config.add_view(handle_bad_request, context=HTTPBadRequest)
 
 
-def expect_param(key, params):
+def expect_param(key, params, parse=None, message=''):
     try:
-        return params[key]
+        value = params[key]
     except KeyError:
         raise HTTPBadRequest({key: 'required'})
+    if parse:
+        try:
+            value = parse(value)
+        except ValueError:
+            raise HTTPBadRequest({key: message or 'unparseable'})
+    return value
 
 
 def handle_bad_request(context, request):
