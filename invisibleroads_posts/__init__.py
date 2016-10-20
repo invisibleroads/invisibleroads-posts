@@ -31,7 +31,7 @@ def includeme(config):
 
 def configure_settings(config):
     settings = config.registry.settings
-
+    # Define add_cached_static_view and add_cached_view
     http_expiration_time = set_default(
         settings, 'client_cache.http.expiration_time', 3600, int)
     config.add_directive(
@@ -42,7 +42,11 @@ def configure_settings(config):
         'add_cached_view',
         lambda config, *arguments, **keywords: config.add_view(
             *arguments, http_cache=http_expiration_time, **keywords))
-
+    # Define data_folder
+    config.add_request_method(
+        lambda request: request.registry.settings['data.folder'],
+        'data_folder', reify=True)
+    # Add package to website.dependencies
     set_default(settings, 'website.dependencies', [], aslist)
     settings['website.dependencies'].append(config.package_name)
 
