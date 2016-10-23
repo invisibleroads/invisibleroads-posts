@@ -46,9 +46,9 @@ def configure_settings(config):
     config.add_request_method(
         lambda request: request.registry.settings['data.folder'],
         'data_folder', reify=True)
-    # Add package to website.dependencies
+    # Add dependency
     set_default(settings, 'website.dependencies', [], aslist)
-    settings['website.dependencies'].append(config.package_name)
+    add_website_dependency(config)
 
 
 def configure_assets(config):
@@ -80,8 +80,8 @@ def configure_views(config):
 
 def add_routes_for_fused_assets(config):
     settings = config.registry.settings
-    package_names = [x.split('.')[0] for x in OrderedSet(
-        settings['website.dependencies'] + [config.root_package.__name__])]
+    package_names = OrderedSet([x.split('.')[0] for x in settings[
+        'website.dependencies'] + [config.root_package.__name__]])
     add_fused_asset_view(config, package_names, 'site.min.css')
     add_fused_asset_view(config, package_names, 'site.min.js')
 
@@ -108,6 +108,13 @@ def add_fused_asset_view(config, package_names, view_name):
         lambda request: Response(
             asset_content, content_type=content_type, charset='utf-8'),
         name=view_name)
+
+
+def add_website_dependency(config, package_name=None):
+    package_name = package_name or config.package_name
+    print('xxx ' + package_name)
+    settings = config.registry.settings
+    settings['website.dependencies'].append(package_name)
 
 
 def get_asset_path(asset_spec):
