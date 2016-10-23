@@ -112,7 +112,6 @@ def add_fused_asset_view(config, package_names, view_name):
 
 def add_website_dependency(config, package_name=None):
     package_name = package_name or config.package_name
-    print('xxx ' + package_name)
     settings = config.registry.settings
     settings['website.dependencies'].append(package_name)
 
