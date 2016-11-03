@@ -46,8 +46,8 @@ def configure_settings(config):
     config.add_request_method(
         lambda request: request.registry.settings['data.folder'],
         'data_folder', reify=True)
-    # Add dependency
-    set_default(settings, 'website.dependencies', [], aslist)
+    # Define website.dependencies
+    settings['website.dependencies'] = []
     add_website_dependency(config)
 
 
