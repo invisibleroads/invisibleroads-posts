@@ -1,13 +1,13 @@
-{% macro navigation_list(request_path, link_names, list_class) %}
-<ul class="nav navbar-nav {{ list_class }}">
-{{ navigation_links(request_path, link_names) -}}
+{% macro navigation_list(request, names, class) %}
+<ul class="nav navbar-nav {{ class }}">
+{{ navigation_links(request, names) -}}
 </ul>
 {% endmacro %}
 
-{% macro navigation_links(request_path, link_names) %}
-{% for link_name in link_names %}
-{% set link_path = '/' + link_name.lower() %}
-<li{% if request_path == link_path %} class="active"{% endif %}><a href="{{ link_path }}">{{ link_name }}</a></li>
+{% macro navigation_links(request, names) %}
+{% for name in names %}
+{% set href = '/' + name.lower() %}
+<li{% if request.path == href %} class="active"{% endif %}><a href="{{ href }}">{{ name }}</a></li>
 {% endfor %}
 {% endmacro %}
 
