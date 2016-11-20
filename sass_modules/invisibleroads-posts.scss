@@ -2,6 +2,23 @@ textarea {
   resize: vertical;
 }
 
+td:last-child {
+  text-align: right;
+}
+
+.affix {
+  top: 20px;
+}
+
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+  border: none;
+}
+
 .card-lg {
   margin-top: 7em;
   margin-bottom: 7em;
@@ -29,6 +46,12 @@ textarea {
 .jumbotron button span {
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.progress {
+  background: #337ab7;
+  height: 1em;
+  width: 0%;
 }
 
 #navbar-top, #navbar-bottom {
