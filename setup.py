@@ -37,13 +37,13 @@ setup(
         'pytest-runner',
     ],
     install_requires=[
-        'pyramid>=1.6.0',
+        'pyramid>=1.7.3',
         'pyramid_debugtoolbar',
         'waitress',
     ] + [
         'dogpile.cache',
         'invisibleroads>=0.1.6',
-        'invisibleroads_macros>=0.7.3',
+        'invisibleroads_macros>=0.7.4',
         'pyramid_jinja2',
         'simplejson',
         'titlecase',
