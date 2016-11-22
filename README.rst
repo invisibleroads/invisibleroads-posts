@@ -2,9 +2,9 @@ InvisibleRoads Posts
 ====================
 Posts form the foundation for most of our web applications.
 
-- Pyramid_ 1.6.1
+- Pyramid_ 1.7.3
 - Bootstrap_ 3.3.6
-- JQuery_ 1.12.2
+- JQuery_ 1.12.4
 
 
 Use
@@ -15,16 +15,13 @@ Prepare environment. ::
     virtualenv ${VIRTUAL_ENV}
     source ${VIRTUAL_ENV}/bin/activate
 
-    export NODE_PATH=${VIRTUAL_ENV}/lib/node_modules
-    npm install -g uglify-js
-
 Install package. ::
 
     PYTHON_PACKAGE=~/Projects/invisibleroads-packages/posts
     NODE_PACKAGE=${PYTHON_PACKAGE}/node_modules/invisibleroads-posts
 
     cd ~/Projects
-    git clone git@github.com:invisibleroads/invisibleroads-posts.git
+    git clone git@github.com:invisibleroads/invisibleroads-posts
 
     cd ${PYTHON_PACKAGE}
     ${VIRTUAL_ENV}/bin/pip install -e .
@@ -38,7 +35,6 @@ Install project. ::
 
     cd ~/Projects/xyz
     ${VIRTUAL_ENV}/bin/pip install -e .
-    bash refresh.sh
 
 Launch development server. ::
 
@@ -124,7 +120,7 @@ Add Bootstrap_. ::
 
 Add JQuery_. ::
 
-    VERSION=1.12.2
+    VERSION=1.12.4
     cd ${ASSETS_FOLDER}
     wget http://code.jquery.com/jquery-${VERSION}.min.js -O jquery.min.js
 

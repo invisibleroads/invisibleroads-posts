@@ -38,13 +38,13 @@ setup(
     ],
     install_requires=[
         'pyramid>=1.7.3',
-        'pyramid_debugtoolbar',
+        'pyramid-debugtoolbar',
         'waitress',
     ] + [
         'dogpile.cache',
-        'invisibleroads>=0.1.6',
-        'invisibleroads_macros>=0.7.4',
-        'pyramid_jinja2',
+        'invisibleroads>=0.1.7',
+        'invisibleroads-macros>=0.7.4',
+        'pyramid-jinja2',
         'simplejson',
         'titlecase',
     ],

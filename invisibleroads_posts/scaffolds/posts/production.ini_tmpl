@@ -3,8 +3,10 @@ use = egg:{{ project }}
 data.folder = %(here)s/data_production
 
 website.name = {{ project }}
-website.owner = InvisibleRoads
+# website.owner = InvisibleRoads
+# website.url = /#
 website.base_template = invisibleroads_posts:templates/base.jinja2
+website.page_not_found_template = invisibleroads_posts:templates/404.jinja2
 # Specify assets to be available at the root URL
 website.root_assets =
     invisibleroads_posts:assets/favicon.ico

@@ -1,18 +1,15 @@
 textarea {
   resize: vertical; }
 
+th:last-child,
 td:last-child {
   text-align: right; }
 
 .affix {
   top: 20px; }
 
-.table-borderless tbody tr td,
-.table-borderless tbody tr th,
-.table-borderless thead tr th,
-.table-borderless thead tr td,
-.table-borderless tfoot tr th,
-.table-borderless tfoot tr td {
+.table-borderless th,
+.table-borderless td {
   border: none; }
 
 .card-lg {
