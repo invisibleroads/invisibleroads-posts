@@ -58,8 +58,6 @@ td:last-child {
   margin-bottom: 0; }
   #navbar-bottom p {
     margin-left: 0; }
-  #navbar-bottom a {
-    padding-right: 0; }
 
 @media (max-width: 768px) {
   .spotlight {
