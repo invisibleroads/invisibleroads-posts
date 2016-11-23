@@ -8,6 +8,9 @@ td:last-child {
 .affix {
   top: 20px; }
 
+@media (max-width: 767px) {
+  .affix {
+    position: static; } }
 .table-borderless th,
 .table-borderless td {
   border: none; }
@@ -37,6 +40,9 @@ td:last-child {
 .jumbotron button span {
   margin-left: 1em;
   margin-right: 1em; }
+
+.feedback {
+  margin-left: 1em; }
 
 .progress {
   background: #337ab7;
