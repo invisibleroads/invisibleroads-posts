@@ -11,16 +11,16 @@
 {% endfor %}
 {% endmacro %}
 
-{% macro confirmation_modal(id, title, default_button_text='OK', primary_button_text='', backdrop='true') %}
+{% macro confirmation_modal(id, title, default_button_text='OK', default_button_class='btn-default', primary_button_text='', primary_button_class='btn-primary', backdrop='true') %}
 <div class="modal fade" id="{{ id }}" tabindex="-1" role="dialog" aria-labelledby="{{ id }}-title" data-backdrop="{{ backdrop }}">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-header"><h4 class="modal-title" id="{{ id }}-title">{{ title }}</h4></div>
 <div class="modal-body">{{ caller() }}</div>
 <div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">{{ default_button_text }}</button>
+<button type="button" class="btn {{ default_button_class }}" data-dismiss="modal">{{ default_button_text }}</button>
 {% if primary_button_text %}
-<button type="button" class="btn btn-primary">{{ primary_button_text }}</button>
+<button type="button" class="btn {{ primary_button_class }}">{{ primary_button_text }}</button>
 {% endif %}
 </div>
 </div>
