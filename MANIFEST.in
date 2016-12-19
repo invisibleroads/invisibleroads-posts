@@ -1,2 +1,2 @@
 include *.cfg *.ini *.rst
-recursive-include invisibleroads_posts *.html *.css *.js *.ico *.jinja2 *.ttf *.woff *.woff2 *_tmpl .gitignore
+recursive-include invisibleroads_posts *.cfg *.css *.html *.ico *.jinja2 *.js *.py *.rst *.ttf *.woff *.woff2 *_tmpl +dot+gitignore .gitignore
