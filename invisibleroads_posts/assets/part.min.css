@@ -23,11 +23,19 @@ td:last-child {
   margin-top: 1em;
   margin-bottom: 1em; }
 
+.feedback {
+  margin-left: 1em; }
+
 .font-lg {
   font-size: 300%; }
 
 .font-xl {
   font-size: 700%; }
+
+.progress {
+  background: #337ab7;
+  height: 1em;
+  width: 0%; }
 
 .jumbotron {
   margin-bottom: 10px; }
@@ -41,15 +49,8 @@ td:last-child {
   margin-left: 1em;
   margin-right: 1em; }
 
-.feedback {
-  margin-left: 1em; }
-
-.progress {
-  background: #337ab7;
-  height: 1em;
-  width: 0%; }
-
-#navbar-top, #navbar-bottom {
+#navbar-top,
+#navbar-bottom {
   border-radius: 0;
   border: 0; }
 
