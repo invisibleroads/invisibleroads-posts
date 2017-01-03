@@ -13,5 +13,10 @@ def main(global_config, **settings):
 
 def includeme(config):
     config.include('invisibleroads_posts')
-    config.add_cached_static_view('_/{{ project }}', '{{ package }}:assets')
+    configure_views(config)
+
+
+def configure_views(config):
+    config.add_cached_static_view(
+        '_/{{ project }}', '{{ package }}:assets')
     add_routes(config)

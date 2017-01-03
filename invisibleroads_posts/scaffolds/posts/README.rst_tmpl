@@ -1,10 +1,10 @@
 {{ project }}
 =============
-- [InvisibleRoads Posts](https://github.com/invisibleroads/invisibleroads-posts) 0.5.2
+- `InvisibleRoads Posts <https://github.com/invisibleroads/invisibleroads-posts>`_ 0.5.2
 
 
-Use
----
+Install
+-------
 Prepare environment. ::
 
     export VIRTUAL_ENV=~/.virtualenvs/crosscompute
@@ -21,6 +21,9 @@ Install package. ::
     ${VIRTUAL_ENV}/bin/pip install -e .
     bash refresh.sh
 
+
+Use
+---
 Launch development server. ::
 
     ${VIRTUAL_ENV}/bin/pserve development.ini
