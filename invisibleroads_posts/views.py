@@ -30,6 +30,15 @@ def expect_param(key, params, parse=None, message=''):
     return value
 
 
+def expect_integer(key, params, minimum_value=None, maximum_value=None):
+    value = expect_param(key, params, int, 'expected_integer')
+    if minimum_value and value < minimum_value:
+        raise HTTPBadRequest({key: 'expected_integer >= %s' % minimum_value})
+    if maximum_value and value > maximum_value:
+        raise HTTPBadRequest({key: 'expected_integer <= %s' % maximum_value})
+    return value
+
+
 def handle_bad_request(context, request):
     response = request.response
     response.status_int = context.status_int
