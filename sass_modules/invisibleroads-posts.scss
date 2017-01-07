@@ -18,7 +18,7 @@ td:last-child {
 
 .table-borderless th,
 .table-borderless td {
-  border: none;
+  border: 0 !important;
 }
 
 .card-lg {
@@ -37,11 +37,6 @@ td:last-child {
 }
 .font-xl {
   font-size: 700%;
-}
-.progress {
-  background: #337ab7;
-  height: 1em;
-  width: 0%;
 }
 
 .jumbotron {
