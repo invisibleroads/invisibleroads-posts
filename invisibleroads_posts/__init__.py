@@ -2,6 +2,7 @@ import logging
 import mimetypes
 from invisibleroads_macros.iterable import OrderedSet, set_default
 from os.path import abspath, basename, exists
+from paste.urlmap import URLMap
 from pyramid.config import Configurator
 from pyramid.path import AssetResolver
 from pyramid.response import FileResponse, Response
@@ -15,8 +16,23 @@ from .views import add_routes
 LOG = logging.getLogger(__name__)
 
 
+class InvisibleRoadsConfigurator(Configurator):
+
+    def make_wsgi_app(self):
+        app = super(InvisibleRoadsConfigurator, self).make_wsgi_app()
+
+        settings = self.registry.settings
+        base_url = settings['website.base_url']
+        if base_url != '/':
+            url_map = URLMap()
+            url_map[base_url] = app
+            app = url_map
+
+        return app
+
+
 def main(global_config, **settings):
-    config = Configurator(settings=settings)
+    config = InvisibleRoadsConfigurator(settings=settings)
     includeme(config)
     add_routes_for_fused_assets(config)
     return config.make_wsgi_app()
@@ -55,6 +71,8 @@ def configure_settings(config):
     set_default(settings, 'website.owner', 'InvisibleRoads')
     set_default(settings, 'website.brand_url', '/#')
     set_default(
+        settings, 'website.base_url', '/', lambda x: '/' + x.strip('/') + '/')
+    set_default(
         settings, 'website.base_template',
         'invisibleroads_posts:templates/base.jinja2')
     set_default(
@@ -81,6 +99,7 @@ def configure_views(config):
         'website_name': settings['website.name'],
         'website_owner': settings['website.owner'],
         'brand_url': settings['website.brand_url'],
+        'base_url': settings['website.base_url'],
         'base_template': settings['website.base_template'],
         'render_title': render_title,
     })

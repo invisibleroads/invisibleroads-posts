@@ -1,12 +1,12 @@
 0.5
 ---
+- Add base_url
 - Assemble site.min.css and site.min.js from website.dependencies
-- Update posts scaffold to use website.dependencies
 
 0.4
 ---
-- Add page_description
 - Add confirmation_modal
+- Add page_description
 - Fix Python 3 compatibility
 
 0.3
