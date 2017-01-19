@@ -10,9 +10,9 @@
 {% if request.path[1:] %} {{ render_title(request.path) }} &middot; {% endif %}
 {{ website_name }}
 {%- endblock %}</title>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 {% block head_style_loaded %}
-<link rel="stylesheet" href="/site.min.css">
+<link rel="stylesheet" href="{{ request.application_url }}/site.min.css">
 {% endblock %}
 <style>
 {% block head_style_inline %}{% endblock %}
@@ -25,6 +25,7 @@
 var IR = {}, x;
 x = IR.posts = {};
 x.assets_url = '{{ request.static_path("invisibleroads_posts:assets/") }}';
+x.base_url = '{{ request.application_url }}/'
 x.website_owner = '{{ website_owner }}';
 {% block head_script_inline %}{% endblock %}
 </script>
@@ -39,7 +40,7 @@ x.website_owner = '{{ website_owner }}';
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" href="{{ website_url }}">{% block body_brand %}{{ website_name }}{% endblock %}</a>
+<a class="navbar-brand" href="{{ brand_url }}">{% block body_brand %}{{ website_name }}{% endblock %}</a>
 </div>
 <div id="navbar-collapse-top" class="navbar-collapse collapse">
 {% block body_navigation_top %}{% endblock -%}
@@ -69,10 +70,10 @@ x.website_owner = '{{ website_owner }}';
 </nav>
 <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/jquery.min.js') }}">\x3C/script>')</script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap/js/bootstrap.min.js') }}">\x3C/script>')</script>
 {% block body_script_loaded %}
-<script src="/site.min.js"></script>
+<script src="{{ request.application_url }}/site.min.js"></script>
 {% endblock %}
 <script>
 {% block body_script_inline %}{% endblock %}

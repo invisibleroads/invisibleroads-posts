@@ -49,13 +49,24 @@ def configure_settings(config):
     # Define website.dependencies
     settings['website.dependencies'] = []
     add_website_dependency(config)
+    # Define miscellaneous settings
+    set_default(settings, 'website.root_assets', [], aslist)
+    set_default(settings, 'website.name', 'InvisibleRoads')
+    set_default(settings, 'website.owner', 'InvisibleRoads')
+    set_default(settings, 'website.brand_url', '/#')
+    set_default(
+        settings, 'website.base_template',
+        'invisibleroads_posts:templates/base.jinja2')
+    set_default(
+        settings, 'website.page_not_found_template',
+        'invisibleroads_posts:templates/404.jinja2')
 
 
 def configure_assets(config):
     settings = config.registry.settings
     config.add_cached_static_view(
         '_/invisibleroads-posts', 'invisibleroads_posts:assets')
-    for asset_spec in aslist(settings.get('website.root_assets', [])):
+    for asset_spec in settings['website.root_assets']:
         asset_path = get_asset_path(asset_spec)
         asset_name = basename(asset_path)
         config.add_cached_view(
@@ -67,12 +78,10 @@ def configure_views(config):
     config.include('pyramid_jinja2')
     config.commit()
     config.get_jinja2_environment().globals.update({
-        'website_name': settings.get('website.name', 'InvisibleRoads'),
-        'website_owner': settings.get('website.owner', 'InvisibleRoads'),
-        'website_url': settings.get('website.url', '/#'),
-        'base_template': settings.get(
-            'website.base_template',
-            'invisibleroads_posts:templates/base.jinja2'),
+        'website_name': settings['website.name'],
+        'website_owner': settings['website.owner'],
+        'brand_url': settings['website.brand_url'],
+        'base_template': settings['website.base_template'],
         'render_title': render_title,
     })
     add_routes(config)
@@ -80,8 +89,8 @@ def configure_views(config):
 
 def add_routes_for_fused_assets(config):
     settings = config.registry.settings
-    package_names = OrderedSet([x.split('.')[0] for x in settings[
-        'website.dependencies'] + [config.root_package.__name__]])
+    package_names = OrderedSet(x.split('.')[0] for x in settings[
+        'website.dependencies'] + [config.root_package.__name__])
     add_fused_asset_view(config, package_names, 'site.min.css')
     add_fused_asset_view(config, package_names, 'site.min.js')
 
@@ -111,8 +120,8 @@ def add_fused_asset_view(config, package_names, view_name):
 
 
 def add_website_dependency(config, package_name=None):
-    package_name = package_name or config.package_name
     settings = config.registry.settings
+    package_name = package_name or config.package_name
     settings['website.dependencies'].append(package_name)
 
 

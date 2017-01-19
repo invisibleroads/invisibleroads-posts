@@ -3,7 +3,7 @@ InvisibleRoads Posts
 Posts form the foundation for most of our web applications.
 
 - Pyramid_ 1.7.3
-- Bootstrap_ 3.3.6
+- Bootstrap_ 3.3.7
 - JQuery_ 1.12.4
 
 
@@ -107,7 +107,7 @@ Prepare assets. ::
 
 Add Bootstrap_. ::
 
-    VERSION=3.3.6
+    VERSION=3.3.7
     URL=https://github.com/twbs/bootstrap/releases/download
     cd ~/Documents
     wget ${URL}/v${VERSION}/bootstrap-${VERSION}-dist.zip

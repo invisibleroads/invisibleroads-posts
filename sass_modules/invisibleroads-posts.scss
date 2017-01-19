@@ -10,11 +10,6 @@ td:last-child {
 .affix {
   top: 20px;
 }
-@media (max-width: 767px) {
-  .affix {
-    position: static;
-  }
-}
 
 .table-borderless th,
 .table-borderless td {
@@ -29,9 +24,11 @@ td:last-child {
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
 .feedback {
   margin-left: 1em;
 }
+
 .font-lg {
   font-size: 300%;
 }
@@ -65,18 +62,21 @@ td:last-child {
   margin-bottom: 0;
 }
 
-@media (max-width: 768px) {
-  .spotlight {
-    width: 100%;
+@media (max-width: 767px) {
+  .affix {
+    position: static;
   }
   .font-lg {
     font-size: 200%;
+  }
+  .spotlight {
+    width: 100%;
   }
   #navbar-bottom p {
     padding-left: 15px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 479px) {
   .font-lg {
     font-size: 100%;
   }

@@ -10,10 +10,8 @@ def add_routes(config):
     config.add_view(
         renderer='invisibleroads_posts:templates/posts.jinja2',
         route_name='index')
-    config.add_notfound_view(
-        handle_page_not_found, renderer=settings.get(
-            'website.page_not_found_template',
-            'invisibleroads_posts:templates/404.jinja2'))
+    config.add_notfound_view(handle_page_not_found, renderer=settings[
+        'website.page_not_found_template'])
     config.add_view(handle_bad_request, context=HTTPBadRequest)
 
 

@@ -8,9 +8,6 @@ td:last-child {
 .affix {
   top: 20px; }
 
-@media (max-width: 767px) {
-  .affix {
-    position: static; } }
 .table-borderless th,
 .table-borderless td {
   border: 0 !important; }
@@ -55,15 +52,18 @@ td:last-child {
   #navbar-bottom p {
     margin-left: 0; }
 
-@media (max-width: 768px) {
-  .spotlight {
-    width: 100%; }
+@media (max-width: 767px) {
+  .affix {
+    position: static; }
 
   .font-lg {
     font-size: 200%; }
 
+  .spotlight {
+    width: 100%; }
+
   #navbar-bottom p {
     padding-left: 15px; } }
-@media (max-width: 480px) {
+@media (max-width: 479px) {
   .font-lg {
     font-size: 100%; } }
