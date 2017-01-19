@@ -1,11 +1,11 @@
-from invisibleroads_posts import add_routes_for_fused_assets
-from pyramid.config import Configurator
+from invisibleroads_posts import (
+    InvisibleRoadsConfigurator, add_routes_for_fused_assets)
 
 from .views import add_routes
 
 
 def main(global_config, **settings):
-    config = Configurator(settings=settings)
+    config = InvisibleRoadsConfigurator(settings=settings)
     includeme(config)
     add_routes_for_fused_assets(config)
     return config.make_wsgi_app()
