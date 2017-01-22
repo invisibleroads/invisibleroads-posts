@@ -7,6 +7,7 @@ from pyramid.config import Configurator
 from pyramid.path import AssetResolver
 from pyramid.response import FileResponse, Response
 from pyramid.settings import aslist
+from six.moves.urllib.parse import urlparse as parse_url
 
 from .libraries.cache import configure_cache, FUNCTION_CACHE
 from .libraries.text import render_title
@@ -70,8 +71,7 @@ def configure_settings(config):
     set_default(settings, 'website.name', 'InvisibleRoads')
     set_default(settings, 'website.owner', 'InvisibleRoads')
     set_default(settings, 'website.brand_url', '/#')
-    set_default(
-        settings, 'website.base_url', '/', lambda x: '/' + x.strip('/') + '/')
+    set_default(settings, 'website.base_url', '/', _prepare_base_url)
     set_default(
         settings, 'website.base_template',
         'invisibleroads_posts:templates/base.jinja2')
@@ -150,3 +150,8 @@ def get_asset_path(asset_spec):
     else:
         asset_path = abspath(asset_spec)
     return asset_path
+
+
+def _prepare_base_url(x):
+    path = parse_url(x).path.strip('/')
+    return '/%s/' % path if path else '/'

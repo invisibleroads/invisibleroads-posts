@@ -20,6 +20,12 @@ td:last-child {
   margin-top: 1em;
   margin-bottom: 1em; }
 
+.editable {
+  border: thin solid transparent; }
+
+.editable:hover {
+  border: thin dashed green; }
+
 .feedback {
   margin-left: 1em; }
 
