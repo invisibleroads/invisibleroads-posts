@@ -44,6 +44,7 @@ setup(
         'dogpile.cache',
         'invisibleroads>=0.1.7',
         'invisibleroads-macros>=0.7.4',
+        'paste',
         'pyramid-jinja2',
         'simplejson',
         'titlecase',
