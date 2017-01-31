@@ -40,7 +40,7 @@ td:last-child {
   font-size: 300%;
 }
 .font-xl {
-  font-size: 700%;
+  font-size: 600%;
 }
 
 .jumbotron button {
@@ -73,15 +73,12 @@ td:last-child {
   .font-lg {
     font-size: 200%;
   }
-  .spotlight {
-    width: 100%;
-  }
   #navbar-bottom p {
     padding-left: 15px;
   }
 }
 @media (max-width: 479px) {
   .font-lg {
-    font-size: 100%;
+    font-size: 120%;
   }
 }

@@ -28,8 +28,14 @@ def expect_param(key, params, parse=None, message=''):
     return value
 
 
-def expect_integer(key, params, minimum_value=None, maximum_value=None):
+def expect_integer(
+        key, params, parse=None, minimum_value=None, maximum_value=None):
     value = expect_param(key, params, int, 'expected integer')
+    if parse:
+        try:
+            value = parse(value)
+        except ValueError:
+            raise HTTPBadRequest({key: 'unexpected value'})
     if minimum_value and value < minimum_value:
         raise HTTPBadRequest({key: 'expected integer >= %s' % minimum_value})
     if maximum_value and value > maximum_value:
