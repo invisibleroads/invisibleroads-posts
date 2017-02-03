@@ -70,6 +70,7 @@ def configure_settings(config):
     set_default(settings, 'website.root_assets', [], aslist)
     set_default(settings, 'website.name', 'InvisibleRoads')
     set_default(settings, 'website.owner', 'InvisibleRoads')
+    set_default(settings, 'website.year', '2017')
     set_default(settings, 'website.brand_url', '/#')
     set_default(settings, 'website.base_url', '/', _prepare_base_url)
     set_default(
@@ -98,6 +99,7 @@ def configure_views(config):
     config.get_jinja2_environment().globals.update({
         'website_name': settings['website.name'],
         'website_owner': settings['website.owner'],
+        'website_year': settings['website.year'],
         'brand_url': settings['website.brand_url'],
         'base_url': settings['website.base_url'],
         'base_template': settings['website.base_template'],

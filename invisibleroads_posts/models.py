@@ -15,14 +15,16 @@ class DummyBase(object):
 class FolderMixin(object):
 
     @classmethod
-    def get_from(Class, request):
+    def get_from(Class, request, record_id=None):
         key = Class._singular + '_id'
-        matchdict = request.matchdict
+        if not record_id:
+            matchdict = request.matchdict
+            record_id = matchdict[key]
         data_folder = request.data_folder
-        instance = Class(id=matchdict[key])
+        instance = Class(id=record_id)
         instance_folder = instance.get_folder(data_folder)
         if not exists(instance_folder):
-            raise HTTPNotFound
+            raise HTTPNotFound({key: 'bad'})
         return instance
 
     @classmethod
