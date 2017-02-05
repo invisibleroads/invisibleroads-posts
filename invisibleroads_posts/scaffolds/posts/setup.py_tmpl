@@ -30,7 +30,7 @@ setup(
         'pytest-runner',
     ],
     install_requires=[
-        'invisibleroads_posts>=0.5.2',
+        'invisibleroads_posts>=0.5.3',
     ],
     tests_require=[
         'pytest',

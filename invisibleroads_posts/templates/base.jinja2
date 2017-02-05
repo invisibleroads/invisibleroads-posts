@@ -6,17 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{% block page_description %}{{ website_name }}{% endblock %}">
 <meta name="author" content="{{ website_owner }}">
-<title>{% block page_title %}
-{% if request.path[1:] %} {{ render_title(request.path) }} &middot; {% endif %}
-{{ website_name }}
+<title>{% block page_title -%}
+{% if request.path[1:] %}{{ render_title(request.path) }} &middot; {% endif %}{{ website_name }}
 {%- endblock %}</title>
 <link rel="shortcut icon" type="image/png" href="{{ base_url }}favicon.ico"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-{% block head_style_loaded %}
+{% block head_style_loaded -%}
 <link rel="stylesheet" href="{{ base_url }}site.min.css">
-{% endblock %}
+{%- endblock %}
 <style>
-{% block head_style_inline %}{% endblock %}
+{%- block head_style_inline %}{% endblock -%}
 </style>
 <!--[if lt IE 9]>
 <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -28,7 +27,7 @@ x = IR.posts = {};
 x.assets_url = '{{ request.static_path("invisibleroads_posts:assets/") }}';
 x.base_url = '{{ base_url }}';
 x.website_owner = '{{ website_owner }}';
-{% block head_script_inline %}{% endblock %}
+{%- block head_script_inline %}{% endblock -%}
 </script>
 </head>
 <body>
@@ -73,11 +72,11 @@ x.website_owner = '{{ website_owner }}';
 <script>window.jQuery || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/jquery.min.js') }}">\x3C/script>')</script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap/js/bootstrap.min.js') }}">\x3C/script>')</script>
-{% block body_script_loaded %}
+{%- block body_script_loaded -%}
 <script src="{{ base_url }}site.min.js"></script>
-{% endblock %}
+{% endblock -%}
 <script>
-{% block body_script_inline %}{% endblock %}
+{%- block body_script_inline %}{% endblock -%}
 </script>
 </body>
 </html>
