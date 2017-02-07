@@ -7,6 +7,15 @@ from invisibleroads_posts import main as get_app
 
 
 @fixture
+def posts_request(config, data_folder):
+    config.include('invisibleroads_posts')
+    posts_request = testing.DummyRequest(
+        data_folder=data_folder, scheme='http')
+    posts_request.__dict__['registry'] = posts_request.registry
+    yield posts_request
+
+
+@fixture
 def website(config, settings):
     config.include('pyramid_jinja2')
     yield TestApp(get_app({}, **settings))
