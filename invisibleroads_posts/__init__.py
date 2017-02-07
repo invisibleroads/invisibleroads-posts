@@ -61,8 +61,7 @@ def configure_settings(config):
             *arguments, http_cache=http_expiration_time, **keywords))
     # Define data_folder
     config.add_request_method(
-        lambda request: request.registry.settings['data.folder'],
-        'data_folder', reify=True)
+        lambda request: settings['data.folder'], 'data_folder', reify=True)
     # Define website.dependencies
     settings['website.dependencies'] = []
     add_website_dependency(config)

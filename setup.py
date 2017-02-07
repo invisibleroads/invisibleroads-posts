@@ -37,21 +37,21 @@ setup(
         'pytest-runner',
     ],
     install_requires=[
-        'pyramid>=1.7.3',
         'pyramid-debugtoolbar',
+        'pyramid>=1.7.3',
         'waitress',
     ] + [
         'dogpile.cache',
-        'invisibleroads>=0.1.7',
         'invisibleroads-macros>=0.7.4',
+        'invisibleroads>=0.1.7',
         'paste',
         'pyramid-jinja2',
+        'pytest',
         'simplejson',
         'titlecase',
+        'webtest',
     ],
     tests_require=[
-        'pytest',
         'pytest-cov',
-        'webtest',
     ],
     entry_points=ENTRY_POINTS)

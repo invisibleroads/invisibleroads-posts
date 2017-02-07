@@ -10,9 +10,21 @@ def add_routes(config):
     config.add_view(
         renderer='invisibleroads_posts:templates/posts.jinja2',
         route_name='index')
+    config.add_view(handle_bad_request, context=HTTPBadRequest)
     config.add_notfound_view(handle_page_not_found, renderer=settings[
         'website.page_not_found_template'])
-    config.add_view(handle_bad_request, context=HTTPBadRequest)
+
+
+def expect_integer(
+        key, params, validate=None, minimum_value=None, maximum_value=None):
+    value = expect_param(key, params, int, 'expected integer')
+    if validate and not validate(value):
+        raise HTTPBadRequest({key: 'unexpected value'})
+    if minimum_value and value < minimum_value:
+        raise HTTPBadRequest({key: 'expected value >= %s' % minimum_value})
+    if maximum_value and value > maximum_value:
+        raise HTTPBadRequest({key: 'expected value <= %s' % maximum_value})
+    return value
 
 
 def expect_param(key, params, parse=None, message=''):
@@ -24,22 +36,7 @@ def expect_param(key, params, parse=None, message=''):
         try:
             value = parse(value)
         except ValueError:
-            raise HTTPBadRequest({key: message or 'unparseable'})
-    return value
-
-
-def expect_integer(
-        key, params, parse=None, minimum_value=None, maximum_value=None):
-    value = expect_param(key, params, int, 'expected integer')
-    if parse:
-        try:
-            value = parse(value)
-        except ValueError:
-            raise HTTPBadRequest({key: 'unexpected value'})
-    if minimum_value and value < minimum_value:
-        raise HTTPBadRequest({key: 'expected integer >= %s' % minimum_value})
-    if maximum_value and value > maximum_value:
-        raise HTTPBadRequest({key: 'expected integer <= %s' % maximum_value})
+            raise HTTPBadRequest({key: message or 'unexpected value'})
     return value
 
 

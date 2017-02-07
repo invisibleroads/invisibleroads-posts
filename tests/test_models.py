@@ -1,11 +1,7 @@
 from os.path import basename
-from pytest import fixture, raises
+from pytest import raises
 
 from invisibleroads_posts.models import DummyBase, FolderMixin
-
-
-class X(FolderMixin, DummyBase):
-    pass
 
 
 class TestFolderMixin(object):
@@ -36,6 +32,5 @@ class TestFolderMixin(object):
         assert basename(folder) == str(self.instance_id)
 
 
-@fixture
-def data_folder(tmpdir):
-    return str(tmpdir)
+class X(FolderMixin, DummyBase):
+    pass
