@@ -7,24 +7,13 @@ from invisibleroads_posts.views import expect_integer, expect_param
 
 class TestAddRoutes(object):
 
-    def test_index(self, website):
-        website.get('')
-        website.get('/site.min.css')
-        website.get('/site.min.js')
+    def test_index(self, posts_website):
+        posts_website.get('')
+        posts_website.get('/site.min.css')
+        posts_website.get('/site.min.js')
 
-    def test_bad_request(self, config, website):
-        route_name = 'x.json'
-        route_url = '/x.json'
-
-        def see_x_json(request):
-            raise HTTPBadRequest({})
-
-        config.add_route(route_name, route_url)
-        config.add_view(see_x_json, route_name=route_name)
-        website.get(route_url, status=404)
-
-    def test_page_not_found(self, website):
-        response = website.get('/x', status=404)
+    def test_page_not_found(self, posts_website):
+        response = posts_website.get('/x', status=404)
         assert response.text == render(
             'invisibleroads_posts:templates/404.jinja2', {})
 
