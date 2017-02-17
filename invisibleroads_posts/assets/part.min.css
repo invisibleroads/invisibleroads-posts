@@ -20,6 +20,10 @@ td:last-child {
   margin-top: 1em;
   margin-bottom: 1em; }
 
+.card-xs {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em; }
+
 .editable {
   border: thin solid transparent; }
 

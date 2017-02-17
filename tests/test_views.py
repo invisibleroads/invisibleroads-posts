@@ -29,8 +29,14 @@ class TestExpectInteger(object):
             expect_integer('x', {'x': 'x'})
 
     def test_reject_unexpected_value(self):
+
+        def parse(x):
+            if x != 10:
+                raise ValueError
+            return x
+
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': '1'}, lambda x: x == 10)
+            expect_integer('x', {'x': '1'}, parse)
 
     def test_reject_small_value(self):
         with raises(HTTPBadRequest):
