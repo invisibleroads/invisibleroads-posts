@@ -2,6 +2,7 @@
 ---
 - Add base_url
 - Assemble site.min.css and site.min.js from website.dependencies
+- Add test fixtures for downstream packages
 
 0.4
 ---
