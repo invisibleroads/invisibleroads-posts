@@ -11,9 +11,9 @@
 {%- endblock %}</title>
 <link rel="shortcut icon" type="image/png" href="{{ base_url }}favicon.ico"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-{% block head_style_loaded -%}
+{% block head_style_loaded %}
 <link rel="stylesheet" href="{{ base_url }}site.min.css">
-{%- endblock %}
+{% endblock %}
 <style>
 {%- block head_style_inline %}{% endblock -%}
 </style>
@@ -72,11 +72,11 @@ x.website_owner = '{{ website_owner }}';
 <script>window.jQuery || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/jquery.min.js') }}">\x3C/script>')</script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>$.fn.modal || document.write('<script src="{{ request.static_path('invisibleroads_posts:assets/bootstrap/js/bootstrap.min.js') }}">\x3C/script>')</script>
-{%- block body_script_loaded -%}
+{% block body_script_loaded %}
 <script src="{{ base_url }}site.min.js"></script>
-{% endblock -%}
+{% endblock %}
 <script>
-{%- block body_script_inline %}{% endblock -%}
+{% block body_script_inline %}{% endblock %}
 </script>
 </body>
 </html>
