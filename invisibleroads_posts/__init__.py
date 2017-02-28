@@ -1,6 +1,7 @@
 import logging
 import mimetypes
 from invisibleroads_macros.iterable import OrderedSet, set_default
+from os import environ
 from os.path import abspath, basename, exists
 from paste.urlmap import URLMap
 from pyramid.config import Configurator
@@ -65,6 +66,10 @@ def configure_settings(config):
     # Define website.dependencies
     settings['website.dependencies'] = []
     add_website_dependency(config)
+    # Define website.environment
+    for line in settings.get('website.environment', '').strip().splitlines():
+        k, v = line.split()
+        environ[k] = v
     # Define miscellaneous settings
     set_default(settings, 'website.root_assets', [], aslist)
     set_default(settings, 'website.name', 'InvisibleRoads')
