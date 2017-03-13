@@ -11,11 +11,6 @@ td:last-child {
   top: 20px;
 }
 
-.table-borderless th,
-.table-borderless td {
-  border: 0 !important;
-}
-
 .card-lg {
   margin-top: 7em;
   margin-bottom: 7em;
@@ -27,6 +22,10 @@ td:last-child {
 .card-xs {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
+}
+
+.disabled {
+  text-decoration: line-through;
 }
 
 .editable {
@@ -55,6 +54,11 @@ td:last-child {
 .jumbotron button span {
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.table-borderless th,
+.table-borderless td {
+  border: 0 !important;
 }
 
 #navbar-top,
