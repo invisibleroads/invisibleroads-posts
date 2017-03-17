@@ -83,6 +83,8 @@ def configure_settings(config):
     set_default(
         settings, 'website.page_not_found_template',
         'invisibleroads_posts:templates/404.jinja2')
+    set_default(settings, 'google.analytics.property_id', '')
+    set_default(settings, 'google.adsense.publisher_id', '')
 
 
 def configure_assets(config):
@@ -104,9 +106,13 @@ def configure_views(config):
         'website_name': settings['website.name'],
         'website_owner': settings['website.owner'],
         'website_year': settings['website.year'],
-        'brand_url': settings['website.brand_url'],
-        'base_url': settings['website.base_url'],
         'base_template': settings['website.base_template'],
+        'base_url': settings['website.base_url'],
+        'brand_url': settings['website.brand_url'],
+        'google_analytics_property_id': settings[
+            'google.analytics.property_id'],
+        'google_adsense_publisher_id': settings[
+            'google.adsense.publisher_id'],
         'render_title': render_title,
     })
     add_routes(config)

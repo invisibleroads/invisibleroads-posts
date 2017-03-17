@@ -22,6 +22,11 @@
 <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <script>
+{% if google_analytics_property_id %}
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', '{{ google_analytics_property_id }}', 'auto');
+ga('send', 'pageview');
+{% endif %}
 var IR = {}, x;
 x = IR.posts = {};
 x.assets_url = '{{ request.static_path("invisibleroads_posts:assets/") }}';
@@ -78,5 +83,9 @@ x.website_owner = '{{ website_owner }}';
 <script>
 {% block body_script_inline %}{% endblock %}
 </script>
+{% if google_adsense_publisher_id %}
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>(adsbygoogle = window.adsbygoogle || []).push({google_ad_client: '{{ google_adsense_publisher_id }}', enable_page_level_ads: true});</script>
+{% endif %}
 </body>
 </html>
