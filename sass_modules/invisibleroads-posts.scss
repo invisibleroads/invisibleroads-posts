@@ -56,6 +56,11 @@ td:last-child {
   margin-right: 1em;
 }
 
+.scrollable {
+  max-height: 300px;
+  overflow: auto;
+}
+
 .table-borderless th,
 .table-borderless td {
   border: 0 !important;

@@ -1,14 +1,9 @@
-{% macro navigation_list(request, names, class) %}
+{% macro navigation_list(request, name_path_packs, class) %}
 <ul class="nav navbar-nav {{ class }}">
-{{ navigation_links(request, names) -}}
-</ul>
-{% endmacro %}
-
-{% macro navigation_links(request, names) %}
-{% for name in names %}
-{% set href = '/' + name.lower() %}
-<li{% if request.path == href %} class="active"{% endif %}><a href="{{ href }}">{{ name }}</a></li>
+{% for name, path in name_path_packs %}
+<li{% if request.path == path %} class="active"{% endif %}><a href="{{ path }}">{{ name }}</a></li>
 {% endfor %}
+</ul>
 {% endmacro %}
 
 {% macro confirmation_modal(id, title='', default_button_text='OK', default_button_class='btn-default', primary_button_text='', primary_button_class='btn-primary', backdrop='true') %}
