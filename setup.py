@@ -28,7 +28,7 @@ setup(
     ],
     author='Roy Hyunjin Han',
     author_email='rhh@crosscompute.com',
-    url='http://invisibleroads.com',
+    url='https://github.com/invisibleroads/invisibleroads-posts',
     keywords='web wsgi bfg pylons pyramid invisibleroads',
     packages=find_packages(),
     include_package_data=True,
