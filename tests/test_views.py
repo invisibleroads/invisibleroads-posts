@@ -40,14 +40,17 @@ class TestExpectInteger(object):
 
     def test_reject_small_value(self):
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': '1'}, minimum_value=10)
+            expect_integer('x', {'x': '1'}, minimum=10)
 
     def test_reject_large_value(self):
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': '100'}, maximum_value=10)
+            expect_integer('x', {'x': '100'}, maximum=10)
 
     def test_accept_expected_value(self):
         assert 100 == expect_integer('x', {'x': '100'})
+
+    def test_accept_default(self):
+        assert 100 == expect_integer('x', {}, default='100')
 
 
 class TestExpectParam(object):
@@ -56,9 +59,12 @@ class TestExpectParam(object):
         with raises(HTTPBadRequest):
             expect_param('x', {})
 
-    def test_reject_reject_unexpected_value(self):
+    def test_reject_unexpected_value(self):
         with raises(HTTPBadRequest):
             expect_param('x', {'x': 'x'}, float)
 
     def test_accept_expected_value(self):
-        assert 'x' == expect_param('x', {'x': 'x'})
+        assert 1.5 == expect_param('x', {'x': 1.5}, float)
+
+    def test_accept_default(self):
+        assert 1.5 == expect_param('x', {}, float, default='1.5')

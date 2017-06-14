@@ -16,25 +16,28 @@ def add_routes(config):
 
 
 def expect_integer(
-        key, params, parse=None, minimum_value=None, maximum_value=None):
-    value = expect_param(key, params, int, 'expected integer')
+        key, params, parse=None, minimum=None, maximum=None, default=None):
+    value = expect_param(key, params, int, 'expected integer', default=default)
     if parse:
         try:
             value = parse(value)
         except ValueError:
             raise HTTPBadRequest({key: 'unexpected value'})
-    if minimum_value and value < minimum_value:
-        raise HTTPBadRequest({key: 'expected value >= %s' % minimum_value})
-    if maximum_value and value > maximum_value:
-        raise HTTPBadRequest({key: 'expected value <= %s' % maximum_value})
+    if minimum and value < minimum:
+        raise HTTPBadRequest({key: 'expected value >= %s' % minimum})
+    if maximum and value > maximum:
+        raise HTTPBadRequest({key: 'expected value <= %s' % maximum})
     return value
 
 
-def expect_param(key, params, parse=None, message=''):
+def expect_param(key, params, parse=None, message=None, default=None):
     try:
         value = params[key]
     except KeyError:
-        raise HTTPBadRequest({key: 'required'})
+        if default is not None:
+            value = default
+        else:
+            raise HTTPBadRequest({key: 'required'})
     if parse:
         try:
             value = parse(value)
