@@ -71,7 +71,10 @@ def configure_settings(config):
         k, v = line.split()
         environ[k] = v
     # Define miscellaneous settings
-    set_default(settings, 'website.root_assets', [], aslist)
+    set_default(settings, 'website.root_assets', [
+        'invisibleroads_posts:assets/favicon.ico',
+        'invisibleroads_posts:assets/robots.txt',
+    ], aslist)
     set_default(settings, 'website.name', 'InvisibleRoads')
     set_default(settings, 'website.owner', 'InvisibleRoads')
     set_default(settings, 'website.year', '2017')
