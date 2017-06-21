@@ -13,6 +13,7 @@ website.page_not_found_template = invisibleroads_posts:templates/404.jinja2
 website.root_assets =
     invisibleroads_posts:assets/favicon.ico
     invisibleroads_posts:assets/robots.txt
+website.environment =
 
 # Cache assets for specified number of seconds
 client_cache.http.expiration_time = 3600
@@ -38,15 +39,19 @@ port = 6543
 url_scheme = http
 
 [loggers]
-keys = root, {{ package }}
+keys = root, data, {{ package }}
 [handlers]
-keys = console
+keys = console, data_file
 [formatters]
-keys = generic
+keys = generic, data_format
 
 [logger_root]
-level = INFO
+level = DEBUG
 handlers = console
+[logger_data]
+level = DEBUG
+handlers = data_file
+qualname = data
 [logger_{{ package }}]
 level = DEBUG
 handlers =
@@ -57,6 +62,13 @@ class = StreamHandler
 args = (sys.stderr,)
 level = NOTSET
 formatter = generic
+[handler_data_file]
+class = FileHandler
+args = ('%(here)s/data_development.log', 'a')
+level = INFO
+formatter = data_format
 
 [formatter_generic]
 format = %(asctime)s %(levelname)-5.5s [%(name)s:%(lineno)s][%(threadName)s] %(message)s
+[formatter_data_format]
+format = %(created)f,%(funcName)s,%(message)s
