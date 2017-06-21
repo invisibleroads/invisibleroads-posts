@@ -1,6 +1,6 @@
-import logging
 import mimetypes
 from invisibleroads_macros.iterable import OrderedSet, set_default
+from invisibleroads_macros.log import get_log
 from os import environ
 from os.path import abspath, basename, exists
 from paste.urlmap import URLMap
@@ -15,7 +15,7 @@ from .libraries.text import render_title
 from .views import add_routes
 
 
-LOG = logging.getLogger(__name__)
+L = get_log(__name__)
 
 
 class InvisibleRoadsConfigurator(Configurator):
@@ -128,17 +128,17 @@ def add_fused_asset_view(config, package_names, view_name):
     Prepare view for asset that is assembled from many parts.
     Call this function after including your pyramid configuration callables.
     """
-    LOG.debug('Generating %s' % view_name)
+    L.debug('Generating %s' % view_name)
     file_name = view_name.replace('site', 'part')
     asset_parts = []
     for package_name in package_names:
         asset_spec = '%s:assets/%s' % (package_name, file_name)
         asset_path = get_asset_path(asset_spec)
         if not exists(asset_path):
-            LOG.debug('_ %s' % asset_spec)
+            L.debug('_ %s' % asset_spec)
             continue
         asset_parts.append(open(asset_path).read().strip())
-        LOG.debug('+ %s' % asset_spec)
+        L.debug('+ %s' % asset_spec)
     asset_content = '\n'.join(asset_parts)
     content_type = mimetypes.guess_type(view_name)[0]
     config.add_cached_view(
