@@ -11,9 +11,9 @@ td:last-child {
   top: 20px;
 }
 
-.card-lg {
-  margin-top: 7em;
-  margin-bottom: 7em;
+.card-md {
+  margin-top: 3em;
+  margin-bottom: 3em;
 }
 .card-sm {
   margin-top: 1em;
@@ -33,6 +33,10 @@ td:last-child {
 }
 .editable:hover {
   border: thin dashed green;
+}
+
+.emphasis {
+  background-color: yellow;
 }
 
 .feedback {
