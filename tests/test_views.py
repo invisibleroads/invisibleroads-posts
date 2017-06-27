@@ -20,51 +20,65 @@ class TestAddRoutes(object):
 
 class TestExpectInteger(object):
 
-    def test_reject_non_integer(self):
+    def test_reject_small_value(self, posts_request):
+        posts_request.params = {'x': '1'}
         with raises(HTTPBadRequest):
-            expect_integer('x', {})
+            expect_integer(posts_request, 'x', minimum=10)
+
+    def test_reject_large_value(self, posts_request):
+        posts_request.params = {'x': '100'}
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': ''})
+            expect_integer(posts_request, 'x', maximum=10)
+
+    def test_reject_non_integer(self, posts_request):
+        posts_request.params = {}
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': 'x'})
+            expect_integer(posts_request, 'x')
 
-    def test_reject_unexpected_value(self):
-
-        def parse(x):
-            if x != 10:
-                raise ValueError
-            return x
-
+        posts_request.params = {'x': ''}
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': '1'}, parse)
+            expect_integer(posts_request, 'x')
 
-    def test_reject_small_value(self):
+        posts_request.params = {'x': 'x'}
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': '1'}, minimum=10)
+            expect_integer(posts_request, 'x')
 
-    def test_reject_large_value(self):
+    def test_reject_unexpected_value(self, posts_request):
+        posts_request.params = {'x': '1'}
         with raises(HTTPBadRequest):
-            expect_integer('x', {'x': '100'}, maximum=10)
+            expect_integer(posts_request, 'x', expect_100)
 
-    def test_accept_expected_value(self):
-        assert 100 == expect_integer('x', {'x': '100'})
+    def test_accept_expected_value(self, posts_request):
+        posts_request.params = {'x': '100'}
+        assert 100 == expect_integer(posts_request, 'x', expect_100)
 
-    def test_accept_default(self):
-        assert 100 == expect_integer('x', {}, default='100')
+    def test_accept_default(self, posts_request):
+        posts_request.params = {}
+        assert 100 == expect_integer(posts_request, 'x', default='100')
 
 
 class TestExpectParam(object):
 
-    def test_reject_missing_value(self):
+    def test_reject_missing_value(self, posts_request):
+        posts_request.params = {}
         with raises(HTTPBadRequest):
-            expect_param('x', {})
+            expect_param(posts_request, 'x')
 
-    def test_reject_unexpected_value(self):
+    def test_reject_unexpected_value(self, posts_request):
+        posts_request.params = {'x': 'x'}
         with raises(HTTPBadRequest):
-            expect_param('x', {'x': 'x'}, float)
+            expect_param(posts_request, 'x', float)
 
-    def test_accept_expected_value(self):
-        assert 1.5 == expect_param('x', {'x': 1.5}, float)
+    def test_accept_expected_value(self, posts_request):
+        posts_request.params = {'x': 1.5}
+        assert 1.5 == expect_param(posts_request, 'x', float)
 
-    def test_accept_default(self):
-        assert 1.5 == expect_param('x', {}, float, default='1.5')
+    def test_accept_default(self, posts_request):
+        posts_request.params = {}
+        assert 1.5 == expect_param(posts_request, 'x', float, default='1.5')
+
+
+def expect_100(x):
+    if x != 100:
+        raise ValueError
+    return x

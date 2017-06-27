@@ -1,3 +1,5 @@
+{% from 'invisibleroads_posts:templates/parts.jinja2' import confirmation_modal -%}
+
 <!doctype html>
 <html lang="{{ request.locale_name }}">
 <head>
@@ -51,7 +53,9 @@ x.website_owner = '{{ website_owner }}';
 <div class="container">
 {% block body_content %}{% endblock %}
 </div>
-{% block body_footer %}{% endblock %}
+{% block body_footer %}
+{% call confirmation_modal(id='feedback-modal', title='', backdrop='static') %}{% endcall %}
+{% endblock %}
 <nav id="navbar-bottom" class="navbar navbar-default navbar-static-bottom">
 <div class="container">
 <div class="navbar-header">

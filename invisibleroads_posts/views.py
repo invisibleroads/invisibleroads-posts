@@ -15,22 +15,8 @@ def add_routes(config):
         'website.page_not_found_template'])
 
 
-def expect_integer(
-        key, params, parse=None, minimum=None, maximum=None, default=None):
-    value = expect_param(key, params, int, 'expected integer', default=default)
-    if parse:
-        try:
-            value = parse(value)
-        except ValueError:
-            raise HTTPBadRequest({key: 'unexpected value'})
-    if minimum and value < minimum:
-        raise HTTPBadRequest({key: 'expected value >= %s' % minimum})
-    if maximum and value > maximum:
-        raise HTTPBadRequest({key: 'expected value <= %s' % maximum})
-    return value
-
-
-def expect_param(key, params, parse=None, message=None, default=None):
+def expect_param(request, key, parse=None, message=None, default=None):
+    params = request.params
     try:
         value = params[key]
     except KeyError:
@@ -43,6 +29,22 @@ def expect_param(key, params, parse=None, message=None, default=None):
             value = parse(value)
         except ValueError:
             raise HTTPBadRequest({key: message or 'unexpected value'})
+    return value
+
+
+def expect_integer(
+        request, key, parse=None, minimum=None, maximum=None, default=None):
+    value = expect_param(
+        request, key, int, 'expected integer', default=default)
+    if parse:
+        try:
+            value = parse(value)
+        except ValueError:
+            raise HTTPBadRequest({key: 'unexpected value'})
+    if minimum and value < minimum:
+        raise HTTPBadRequest({key: 'expected value >= %s' % minimum})
+    if maximum and value > maximum:
+        raise HTTPBadRequest({key: 'expected value <= %s' % maximum})
     return value
 
 
