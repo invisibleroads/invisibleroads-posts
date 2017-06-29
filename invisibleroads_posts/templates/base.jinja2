@@ -29,7 +29,7 @@ x = IR.posts = {};
 x.assets_url = '{{ request.static_path("invisibleroads_posts:assets/") }}';
 x.base_url = '{{ base_url }}';
 x.website_owner = '{{ website_owner }}';
-{%- block head_script_inline %}{% endblock -%}
+{% block head_script_inline %}{% endblock %}
 </script>
 </head>
 <body>
