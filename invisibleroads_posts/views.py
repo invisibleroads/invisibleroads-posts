@@ -27,8 +27,8 @@ def expect_param(request, key, parse=None, message=None, default=None):
     if parse:
         try:
             value = parse(value)
-        except ValueError:
-            raise HTTPBadRequest({key: message or 'unexpected value'})
+        except (KeyError, ValueError):
+            raise HTTPBadRequest({key: message or 'bad'})
     return value
 
 
