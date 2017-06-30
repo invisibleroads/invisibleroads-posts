@@ -21,7 +21,7 @@ td:last-child {
   margin-bottom: 0.1em; }
 
 .disabled {
-  text-decoration: line-through; }
+  pointer-events: none; }
 
 .editable {
   border: thin solid transparent; }
