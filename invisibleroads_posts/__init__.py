@@ -1,5 +1,6 @@
 import mimetypes
-from invisibleroads_macros.iterable import OrderedSet, set_default
+from invisibleroads_macros.configuration import set_default
+from invisibleroads_macros.iterable import OrderedSet
 from invisibleroads_macros.log import get_log
 from os import environ
 from os.path import abspath, basename, exists
