@@ -51,16 +51,18 @@ def includeme(config):
 def configure_settings(config):
     settings = config.registry.settings
     # Define add_cached_static_view and add_cached_view
-    http_expiration_time = set_default(
-        settings, 'client_cache.http.expiration_time', 3600, int)
+    http_expiration_time_in_seconds = set_default(
+        settings, 'client_cache.http.expiration_time_in_seconds', 3600, int)
     config.add_directive(
         'add_cached_static_view',
         lambda config, *arguments, **keywords: config.add_static_view(
-            *arguments, cache_max_age=http_expiration_time, **keywords))
+            *arguments, cache_max_age=http_expiration_time_in_seconds,
+            **keywords))
     config.add_directive(
         'add_cached_view',
         lambda config, *arguments, **keywords: config.add_view(
-            *arguments, http_cache=http_expiration_time, **keywords))
+            *arguments, http_cache=http_expiration_time_in_seconds,
+            **keywords))
     # Define data_folder
     config.add_request_method(
         lambda request: settings['data.folder'], 'data_folder', reify=True)
