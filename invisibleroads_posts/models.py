@@ -3,7 +3,7 @@ from invisibleroads_macros.disk import (
     make_enumerated_folder, make_unique_folder, resolve_relative_path)
 from invisibleroads_macros.table import normalize_key
 from os.path import basename, exists, join
-from pyramid.httpexceptions import HTTPNotFound
+from pyramid.httpexceptions import HTTPBadRequest, HTTPNotFound
 
 
 class DummyBase(object):
@@ -18,8 +18,7 @@ class FolderMixin(object):
     def get_from(Class, request, record_id=None):
         key = Class._singular + '_id'
         if not record_id:
-            matchdict = request.matchdict
-            record_id = matchdict[key]
+            record_id = get_record_id(request, key)
         data_folder = request.data_folder
         instance = Class(id=record_id)
         instance_folder = instance.get_folder(data_folder)
@@ -28,19 +27,19 @@ class FolderMixin(object):
         return instance
 
     @classmethod
-    def spawn(Class, data_folder, random_length=None, *args, **kw):
+    def spawn(Class, data_folder, id_length=None, *args, **kw):
         instance = Class()
         instance.folder = Class.spawn_folder(
-            data_folder, random_length, *args, **kw)
+            data_folder, id_length, *args, **kw)
         instance.id = basename(instance.folder)
         return instance
 
     @classmethod
-    def spawn_folder(Class, data_folder, random_length=None):
+    def spawn_folder(Class, data_folder, id_length=None):
         parent_folder = Class.get_parent_folder(data_folder)
         return make_unique_folder(
-            parent_folder, length=random_length,
-        ) if random_length else make_enumerated_folder(parent_folder)
+            parent_folder, length=id_length,
+        ) if id_length else make_enumerated_folder(parent_folder)
 
     @classmethod
     def get_parent_folder(Class, data_folder):
@@ -58,3 +57,14 @@ class FolderMixin(object):
     def get_folder(self, data_folder):
         parent_folder = self.get_parent_folder(data_folder)
         return resolve_relative_path(str(self.id), parent_folder)
+
+
+def get_record_id(request, key):
+    try:
+        return request.matchdict[key]
+    except KeyError:
+        pass
+    try:
+        return request.params[key]
+    except KeyError:
+        raise HTTPBadRequest({key: 'required'})

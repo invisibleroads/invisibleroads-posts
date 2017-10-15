@@ -6,7 +6,7 @@ from invisibleroads_posts.models import DummyBase, FolderMixin
 
 class TestFolderMixin(object):
 
-    random_length = 10
+    id_length = 10
     instance_id = 100
 
     def test_spawn(self, data_folder):
@@ -18,8 +18,8 @@ class TestFolderMixin(object):
         assert basename(folder) == '1'
 
     def test_spawn_random_folder(self, data_folder):
-        folder = X.spawn_folder(data_folder, self.random_length)
-        assert len(basename(folder)) == self.random_length
+        folder = X.spawn_folder(data_folder, self.id_length)
+        assert len(basename(folder)) == self.id_length
 
     def test_get_parent_folder(self, data_folder):
         parent_folder = X.get_parent_folder(data_folder)
