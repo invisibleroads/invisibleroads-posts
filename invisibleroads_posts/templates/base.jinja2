@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{% block page_description %}{{ website_name }}{% endblock %}">
-<meta name="author" content="{{ website_owner }}">
+<meta name="author" content="{% block page_author %}{{ website_owner }}{% endblock %}">
 <title>{% block page_title -%}
 {% if request.path[1:] %}{{ render_title(request.path) }} &middot; {% endif %}{{ website_name }}
 {%- endblock %}</title>
@@ -65,7 +65,7 @@ x.website_owner = '{{ website_owner }}';
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<p class="navbar-text">&copy; {{ website_year }} {{ website_owner }}</p>
+<p class="navbar-text">&copy; {% block copyright_year %}{{ website_year }}{% endblock %} {% block copyright_author %}{{ website_owner }}{% endblock %}</p>
 </div>
 <div id="navbar-collapse-bottom" class="navbar-collapse collapse">
 {% block body_navigation_bottom %}{% endblock -%}
