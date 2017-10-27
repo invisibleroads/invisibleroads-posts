@@ -16,7 +16,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
     'README.rst', 'CHANGES.rst'])
 setup(
     name='invisibleroads-posts',
-    version='0.5.6',
+    version='0.5.6.1',
     description='Web application defaults',
     long_description=DESCRIPTION,
     classifiers=[
