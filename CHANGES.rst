@@ -3,6 +3,9 @@
 - Add base_url
 - Assemble site.min.css and site.min.js from website.dependencies
 - Add test fixtures for downstream packages
+- Define get_record_id
+- Let child templates override page_author, copyright_year, copyright_author
+- Replace expiration_time with expiration_time_in_seconds
 
 0.4
 ---
