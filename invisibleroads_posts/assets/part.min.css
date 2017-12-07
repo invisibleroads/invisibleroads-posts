@@ -42,6 +42,9 @@ td:last-child {
 .font-lg {
   font-size: 275%; }
 
+.image-container img {
+  max-width: 100%; }
+
 .scrollable {
   max-height: 300px;
   overflow: auto; }
