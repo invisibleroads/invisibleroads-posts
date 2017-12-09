@@ -124,18 +124,19 @@ def add_routes_for_fused_assets(config):
     settings = config.registry.settings
     package_names = OrderedSet(x.split('.')[0] for x in settings[
         'website.dependencies'] + [config.root_package.__name__])
-    version = settings['website.version']
-    add_fused_asset_view(config, package_names, 'site-%s.min.css' % version)
-    add_fused_asset_view(config, package_names, 'site-%s.min.js' % version)
+    add_fused_asset_view(config, package_names, '.min.css')
+    add_fused_asset_view(config, package_names, '.min.js')
 
 
-def add_fused_asset_view(config, package_names, view_name):
+def add_fused_asset_view(config, package_names, file_extension):
     """
     Prepare view for asset that is assembled from many parts.
     Call this function after including your pyramid configuration callables.
     """
+    settings = config.registry.settings
+    file_name = 'part' + file_extension
+    view_name = 'site-%s' % settings['website.version'] + file_extension
     L.debug('Generating %s' % view_name)
-    file_name = view_name.replace('site', 'part')
     asset_parts = []
     for package_name in package_names:
         asset_spec = '%s:assets/%s' % (package_name, file_name)
@@ -146,7 +147,7 @@ def add_fused_asset_view(config, package_names, view_name):
         asset_parts.append(open(asset_path).read().strip())
         L.debug('+ %s' % asset_spec)
     asset_content = '\n'.join(asset_parts)
-    content_type = mimetypes.guess_type(view_name)[0]
+    content_type = mimetypes.guess_type(file_name)[0]
     config.add_cached_view(
         lambda request: Response(
             asset_content, content_type=content_type, charset='utf-8'),
