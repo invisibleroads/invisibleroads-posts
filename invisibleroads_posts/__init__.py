@@ -78,6 +78,7 @@ def configure_settings(config):
         'invisibleroads_posts:assets/favicon.ico',
         'invisibleroads_posts:assets/robots.txt',
     ], aslist)
+    set_default(settings, 'website.version', '0.1')
     set_default(settings, 'website.name', 'InvisibleRoads')
     set_default(settings, 'website.owner', 'InvisibleRoads')
     set_default(settings, 'website.year', '2017')
@@ -107,6 +108,7 @@ def configure_views(config):
     config.include('pyramid_jinja2')
     config.commit()
     config.get_jinja2_environment().globals.update({
+        'website_version': settings['website.version'],
         'website_name': settings['website.name'],
         'website_owner': settings['website.owner'],
         'website_year': settings['website.year'],
@@ -122,8 +124,9 @@ def add_routes_for_fused_assets(config):
     settings = config.registry.settings
     package_names = OrderedSet(x.split('.')[0] for x in settings[
         'website.dependencies'] + [config.root_package.__name__])
-    add_fused_asset_view(config, package_names, 'site.min.css')
-    add_fused_asset_view(config, package_names, 'site.min.js')
+    version = settings['website.version']
+    add_fused_asset_view(config, package_names, 'site-%s.min.css' % version)
+    add_fused_asset_view(config, package_names, 'site-%s.min.js' % version)
 
 
 def add_fused_asset_view(config, package_names, view_name):

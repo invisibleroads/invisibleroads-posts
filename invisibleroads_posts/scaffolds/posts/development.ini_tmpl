@@ -2,6 +2,7 @@
 use = egg:{{ project }}
 data.folder = %(here)s/data_development
 
+website.version = 0.1
 website.name = {{ project }}
 website.owner = InvisibleRoads
 website.year = 2017
