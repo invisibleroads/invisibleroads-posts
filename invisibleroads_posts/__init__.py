@@ -95,7 +95,7 @@ def configure_settings(config):
 def configure_assets(config):
     settings = config.registry.settings
     config.add_cached_static_view(
-        '_/invisibleroads-posts', 'invisibleroads_posts:assets')
+        '-/invisibleroads-posts', 'invisibleroads_posts:assets')
     for asset_spec in settings['website.root_assets']:
         asset_path = get_asset_path(asset_spec)
         asset_name = basename(asset_path)
