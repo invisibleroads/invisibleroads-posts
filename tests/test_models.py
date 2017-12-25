@@ -1,7 +1,7 @@
-from os.path import basename
-from pytest import raises
-
+from invisibleroads_macros.exceptions import BadPath
 from invisibleroads_posts.models import DummyBase, FolderMixin
+from os.path import basename, join
+from pytest import raises
 
 
 class TestFolderMixin(object):
@@ -26,10 +26,11 @@ class TestFolderMixin(object):
         assert basename(parent_folder) == X._plural
 
     def test_get_folder(self, data_folder):
-        with raises(IOError):
+        with raises(BadPath):
             X(id='../1').get_folder(data_folder)
         folder = X(id=self.instance_id).get_folder(data_folder)
         assert basename(folder) == str(self.instance_id)
+        assert folder == join(data_folder, 'xs', str(self.instance_id))
 
 
 class X(FolderMixin, DummyBase):

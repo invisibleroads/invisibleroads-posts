@@ -1,6 +1,6 @@
 from invisibleroads_macros.descriptor import classproperty
 from invisibleroads_macros.disk import (
-    make_enumerated_folder, make_unique_folder, resolve_relative_path)
+    get_absolute_path, make_enumerated_folder, make_unique_folder)
 from invisibleroads_macros.table import normalize_key
 from os.path import basename, exists, join
 from pyramid.httpexceptions import HTTPBadRequest, HTTPNotFound
@@ -56,7 +56,7 @@ class FolderMixin(object):
 
     def get_folder(self, data_folder):
         parent_folder = self.get_parent_folder(data_folder)
-        return resolve_relative_path(str(self.id), parent_folder)
+        return get_absolute_path(str(self.id), parent_folder)
 
 
 def get_record_id(request, key):

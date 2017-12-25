@@ -2,6 +2,7 @@ from pyramid.httpexceptions import HTTPBadRequest
 from pyramid.renderers import render
 from pytest import raises
 
+from invisibleroads_posts.tests import WEBSITE_VERSION
 from invisibleroads_posts.views import expect_integer, expect_param
 
 
@@ -9,8 +10,8 @@ class TestAddRoutes(object):
 
     def test_index(self, posts_website):
         posts_website.get('')
-        posts_website.get('/site.min.css')
-        posts_website.get('/site.min.js')
+        posts_website.get('/site-%s.min.css' % WEBSITE_VERSION)
+        posts_website.get('/site-%s.min.js' % WEBSITE_VERSION)
 
     def test_page_not_found(self, posts_website):
         response = posts_website.get('/x', status=404)
