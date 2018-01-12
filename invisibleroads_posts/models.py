@@ -56,7 +56,8 @@ class FolderMixin(object):
 
     def get_folder(self, data_folder):
         parent_folder = self.get_parent_folder(data_folder)
-        return get_absolute_path(str(self.id), parent_folder)
+        return get_absolute_path(
+            str(self.id), parent_folder, resolve_links=False)
 
 
 def get_record_id(request, key):
