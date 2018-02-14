@@ -52,7 +52,7 @@ def handle_bad_request(context, request):
     response = request.response
     response.status_int = context.status_int
     response.content_type = 'application/json'
-    response.body = json.dumps(context.detail).encode('utf-8')
+    response.text = json.dumps(context.detail)
     return response
 
 
