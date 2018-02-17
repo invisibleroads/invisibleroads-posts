@@ -4,7 +4,7 @@
 - Add test fixtures for downstream packages
 - Bundle css and js from website.dependencies with cache busting
 - Define get_record_id
-- Let child templates override page_author, copyright_year, copyright_author
+- Let templates override page_author, copyright_year, copyright_author
 - Replace expiration_time with expiration_time_in_seconds
 
 0.4
