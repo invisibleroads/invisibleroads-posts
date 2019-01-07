@@ -1,3 +1,7 @@
+0.6
+---
+- Replace emphasis with highlighted
+
 0.5
 ---
 - Add base_url
