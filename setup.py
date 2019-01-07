@@ -16,7 +16,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
     'README.rst', 'CHANGES.rst'])
 setup(
     name='invisibleroads-posts',
-    version='0.6.0',
+    version='0.6.1',
     description='Web application defaults',
     long_description=DESCRIPTION,
     classifiers=[
@@ -41,7 +41,7 @@ setup(
         'waitress',
     ] + [
         'dogpile.cache',
-        'invisibleroads-macros>=0.9.2',
+        'invisibleroads-macros>=0.9.5.1',
         'invisibleroads>=0.2.0',
         'paste',
         'pyramid-jinja2',
