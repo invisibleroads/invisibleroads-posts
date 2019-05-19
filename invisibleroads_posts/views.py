@@ -1,18 +1,14 @@
 import simplejson as json
-from pyramid.httpexceptions import HTTPBadRequest
+from pyramid.httpexceptions import HTTPBadRequest, HTTPException
+from pyramid.view import exception_view_config
 
 
 def add_routes(config):
-    settings = config.registry.settings
-
     config.add_route('index', '')
 
     config.add_view(
         renderer='invisibleroads_posts:templates/posts.jinja2',
         route_name='index')
-    config.add_view(handle_bad_request, context=HTTPBadRequest)
-    config.add_notfound_view(handle_page_not_found, renderer=settings[
-        'website.page_not_found_template'])
 
 
 def expect_param(request, key, parse=None, message=None, default=None):
@@ -48,15 +44,10 @@ def expect_integer(
     return value
 
 
-def handle_bad_request(context, request):
+@exception_view_config(HTTPException)
+def handle_exception(context, request):
     response = request.response
     response.status_int = context.status_int
     response.content_type = 'application/json'
     response.text = json.dumps(context.detail)
     return response
-
-
-def handle_page_not_found(request):
-    response = request.response
-    response.status_int = 404
-    return {}
