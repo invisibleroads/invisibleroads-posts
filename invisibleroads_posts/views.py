@@ -46,8 +46,10 @@ def expect_integer(
 
 @exception_view_config(HTTPException)
 def handle_exception(context, request):
+    status_int = context.status_int
     response = request.response
-    response.status_int = context.status_int
-    response.content_type = 'application/json'
-    response.text = json.dumps(context.detail)
+    response.status_int = status_int
+    if status_int == 400:
+        response.content_type = 'application/json'
+        response.text = json.dumps(context.detail)
     return response
