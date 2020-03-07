@@ -6,9 +6,6 @@ from webtest import TestApp
 from invisibleroads_posts import main as get_app
 
 
-WEBSITE_VERSION = 'x.y.z'
-
-
 @fixture
 def posts_website(posts_request):
     settings = posts_request.registry.settings
@@ -37,15 +34,4 @@ def config(settings):
 
 
 @fixture
-def settings(data_folder):
-    return {
-        'data.folder': data_folder,
-        'website.version': WEBSITE_VERSION,
-    }
-
-
-@fixture
 def data_folder(tmpdir):
-    data_folder = str(tmpdir)
-    yield data_folder
-    remove_safely(data_folder)
