@@ -4,6 +4,18 @@ from pytest import fixture
 
 
 @fixture
+def posts_request(application_config, data_folder):
+    posts_request = testing.DummyRequest(data_folder=data_folder)
+    yield posts_request
+
+
+@fixture
+def application_config(config):
+    config.include('invisibleroads_posts')
+    yield config
+
+
+@fixture
 def config(settings):
     config = testing.setUp(settings=settings)
     yield config

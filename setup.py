@@ -3,6 +3,8 @@ from setuptools import find_packages, setup
 
 
 ENTRY_POINTS = '''
+[invisibleroads]
+initialize = invisibleroads_posts.scripts:InitializePostsScript
 '''
 APPLICATION_CLASSIFIERS = [
     'Programming Language :: Python',
@@ -19,6 +21,7 @@ APPLICATION_REQUIREMENTS = [
     # cache
     'dogpile.cache',
     # shortcut
+    'invisibleroads',
     'invisibleroads-macros-configuration',
     'invisibleroads-macros-disk',
     'invisibleroads-macros-security',

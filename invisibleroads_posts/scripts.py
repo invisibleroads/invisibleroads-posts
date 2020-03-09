@@ -1,5 +1,5 @@
 from invisibleroads.scripts import ConfigurableScript
-from invisibleroads_macros.disk import make_folder, remove_safely
+from invisibleroads_macros_disk import make_folder, remove_folder
 from pyramid.paster import get_appsettings
 
 
@@ -14,7 +14,7 @@ class InitializePostsScript(ConfigurableScript):
     def run(self, args):
         settings = get_appsettings(args.configuration_path)
         if args.restart and 'data.folder' in settings:
-            remove_safely(settings['data.folder'])
+            remove_folder(settings['data.folder'])
         for key, value in settings.items():
             if key.endswith('.folder'):
                 make_folder(value)

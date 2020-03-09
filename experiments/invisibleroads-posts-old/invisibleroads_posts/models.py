@@ -3,7 +3,7 @@ from invisibleroads_macros.disk import (
     get_absolute_path, make_enumerated_folder, make_unique_folder)
 from invisibleroads_macros.table import normalize_key
 from os.path import basename, exists, join
-from pyramid.httpexceptions import HTTPBadRequest, HTTPNotFound
+from pyramid.httpexceptions import HTTPNotFound
 
 
 class DummyBase(object):
@@ -58,14 +58,3 @@ class FolderMixin(object):
         parent_folder = self.get_parent_folder(data_folder)
         return get_absolute_path(
             str(self.id), parent_folder, resolve_links=False)
-
-
-def get_record_id(request, key):
-    try:
-        return request.matchdict[key]
-    except KeyError:
-        pass
-    try:
-        return request.params[key]
-    except KeyError:
-        raise HTTPBadRequest({key: 'required'})

@@ -2,8 +2,7 @@
 *.sw[op]
 *~
 # python
-*.egg
-*.egg-info
+*.egg*
 *.py[co]
 .cache
 .coverage
@@ -15,4 +14,4 @@ dist/
 *.log
 *.tmp
 .DS_Store
-data_*
+*_data
