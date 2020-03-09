@@ -16,8 +16,11 @@ APPLICATION_REQUIREMENTS = [
     'pyramid',
     # test
     'pytest',
+    # cache
+    'dogpile.cache',
     # shortcut
     'invisibleroads-macros-disk',
+    'invisibleroads-macros-security',
 ]
 TEST_REQUIREMENTS = [
     'pytest-cov',
