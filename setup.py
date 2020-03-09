@@ -19,6 +19,7 @@ APPLICATION_REQUIREMENTS = [
     # cache
     'dogpile.cache',
     # shortcut
+    'invisibleroads-macros-configuration',
     'invisibleroads-macros-disk',
     'invisibleroads-macros-security',
 ]

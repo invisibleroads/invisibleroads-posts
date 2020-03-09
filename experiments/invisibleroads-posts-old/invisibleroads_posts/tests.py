@@ -1,5 +1,3 @@
-from invisibleroads_macros.disk import remove_safely
-from pyramid import testing
 from pytest import fixture
 from webtest import TestApp
 
@@ -21,17 +19,6 @@ def posts_request(website_config, data_folder):
 
 
 @fixture
-def website_config(config):
+def application_config(config):
     config.include('invisibleroads_posts')
     yield config
-
-
-@fixture
-def config(settings):
-    config = testing.setUp(settings=settings)
-    yield config
-    testing.tearDown()
-
-
-@fixture
-def data_folder(tmpdir):

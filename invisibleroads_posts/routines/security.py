@@ -1,7 +1,6 @@
 from invisibleroads_macros_security import make_random_string
 
-from .constants import (
-    SECRET_LENGTH)
+from ..constants import SECRET_LENGTH
 
 
 def fill_secrets(settings):

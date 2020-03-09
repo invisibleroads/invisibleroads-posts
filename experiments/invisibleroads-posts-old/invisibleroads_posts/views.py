@@ -1,4 +1,3 @@
-import simplejson as json
 from pyramid.httpexceptions import HTTPBadRequest, HTTPException
 from pyramid.view import exception_view_config
 

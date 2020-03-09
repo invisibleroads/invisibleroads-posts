@@ -1,8 +1,7 @@
 from invisibleroads_macros_configuration import set_default
 from os import environ
 
-from .constants import (
-    FUNCTION_CACHE)
+from .constants import FUNCTION_CACHE
 from .routines.cache import configure_cache
 from .routines.security import fill_secrets
 

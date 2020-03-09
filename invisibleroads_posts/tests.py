@@ -1,5 +1,13 @@
 from invisibleroads_macros_disk import remove_folder
+from pyramid import testing
 from pytest import fixture
+
+
+@fixture
+def config(settings):
+    config = testing.setUp(settings=settings)
+    yield config
+    testing.tearDown()
 
 
 @fixture
