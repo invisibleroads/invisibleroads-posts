@@ -6,19 +6,6 @@ from invisibleroads_posts.tests import WEBSITE_VERSION
 from invisibleroads_posts.views import expect_integer, expect_param
 
 
-class TestAddRoutes(object):
-
-    def test_index(self, posts_website):
-        posts_website.get('')
-        posts_website.get('/site-%s.min.css' % WEBSITE_VERSION)
-        posts_website.get('/site-%s.min.js' % WEBSITE_VERSION)
-
-    def test_page_not_found(self, posts_website):
-        response = posts_website.get('/x', status=404)
-        assert response.text == render(
-            'invisibleroads_posts:templates/404.jinja2', {})
-
-
 class TestExpectParam(object):
 
     def test_reject_missing_value(self, posts_request):

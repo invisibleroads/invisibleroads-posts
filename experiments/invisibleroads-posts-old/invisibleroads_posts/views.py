@@ -3,14 +3,6 @@ from pyramid.httpexceptions import HTTPBadRequest, HTTPException
 from pyramid.view import exception_view_config
 
 
-def add_routes(config):
-    config.add_route('index', '')
-
-    config.add_view(
-        renderer='invisibleroads_posts:templates/posts.jinja2',
-        route_name='index')
-
-
 def expect_param(request, key, parse=None, message=None, default=None):
     params = request.params
     try:

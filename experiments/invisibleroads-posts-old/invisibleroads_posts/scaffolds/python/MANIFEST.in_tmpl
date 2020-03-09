@@ -1,2 +1,0 @@
-include *.cfg *.ini *.rst
-recursive-include {{ package }} *.html *.css *.js *.ico *.jinja2
