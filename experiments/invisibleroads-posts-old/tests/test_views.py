@@ -1,8 +1,6 @@
 from pyramid.httpexceptions import HTTPBadRequest
-from pyramid.renderers import render
 from pytest import raises
 
-from invisibleroads_posts.tests import WEBSITE_VERSION
 from invisibleroads_posts.views import expect_integer, expect_param
 
 
