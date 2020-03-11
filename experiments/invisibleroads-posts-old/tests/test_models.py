@@ -6,9 +6,6 @@ from pytest import raises
 
 class TestFolderMixin(object):
 
-    id_length = 10
-    instance_id = 100
-
     def test_spawn(self, data_folder):
         x = X.spawn(data_folder)
         assert basename(x.folder) == '1'
@@ -31,7 +28,3 @@ class TestFolderMixin(object):
         folder = X(id=self.instance_id).get_folder(data_folder)
         assert basename(folder) == str(self.instance_id)
         assert folder == join(data_folder, 'xs', str(self.instance_id))
-
-
-class X(FolderMixin, DummyBase):
-    pass

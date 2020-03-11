@@ -6,12 +6,6 @@ from os.path import basename, exists, join
 from pyramid.httpexceptions import HTTPNotFound
 
 
-class DummyBase(object):
-
-    def __init__(self, **kw):
-        self.__dict__.update(kw)
-
-
 class FolderMixin(object):
 
     @classmethod
