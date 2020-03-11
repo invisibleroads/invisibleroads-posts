@@ -2,5 +2,5 @@ class InvisibleRoadsError(Exception):
     pass
 
 
-class DataValidationError(ValueError, InvisibleRoadsError):
+class DataValidationError(InvisibleRoadsError):
     pass
