@@ -1,8 +1,6 @@
-from invisibleroads_macros.descriptor import classproperty
 from invisibleroads_macros.disk import (
-    get_absolute_path, make_enumerated_folder, make_unique_folder)
-from invisibleroads_macros.table import normalize_key
-from os.path import basename, exists, join
+    make_enumerated_folder, make_unique_folder)
+from os.path import basename, exists
 from pyramid.httpexceptions import HTTPNotFound
 
 
@@ -34,21 +32,3 @@ class FolderMixin(object):
         return make_unique_folder(
             parent_folder, length=id_length,
         ) if id_length else make_enumerated_folder(parent_folder)
-
-    @classmethod
-    def get_parent_folder(Class, data_folder):
-        return join(data_folder, Class._plural)
-
-    @classproperty
-    def _plural(Class):
-        return Class._singular + 's'
-
-    @classproperty
-    def _singular(Class):
-        key = getattr(Class, '__name__', Class.__class__.__name__)
-        return normalize_key(key, word_separator='_', separate_camel_case=True)
-
-    def get_folder(self, data_folder):
-        parent_folder = self.get_parent_folder(data_folder)
-        return get_absolute_path(
-            str(self.id), parent_folder, resolve_links=False)
