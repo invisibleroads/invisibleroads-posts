@@ -6,6 +6,7 @@ from pytest import fixture
 @fixture
 def posts_request(application_config, data_folder):
     posts_request = testing.DummyRequest(data_folder=data_folder)
+    posts_request.json_body = {}
     yield posts_request
 
 
