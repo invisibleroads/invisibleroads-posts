@@ -23,8 +23,10 @@ APPLICATION_REQUIREMENTS = [
     # shortcut
     'invisibleroads',
     'invisibleroads-macros-configuration',
+    'invisibleroads-macros-descriptor',
     'invisibleroads-macros-disk',
     'invisibleroads-macros-security',
+    'invisibleroads-macros-text',
 ]
 TEST_REQUIREMENTS = [
     'pytest-cov',
@@ -36,7 +38,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
 
 setup(
     name='invisibleroads-posts',
-    version='0.7.0',
+    version='0.7.1',
     description='Web application defaults',
     long_description=DESCRIPTION,
     long_description_content_type='text/markdown',
