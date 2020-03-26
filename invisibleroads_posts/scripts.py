@@ -8,7 +8,7 @@ class InitializePostsScript(ConfigurableScript):
     priority = 10
 
     def configure(self, argument_subparser):
-        super(ConfigurableScript, self).configure(argument_subparser)
+        super(InitializePostsScript, self).configure(argument_subparser)
         argument_subparser.add_argument('--restart', action='store_true')
 
     def run(self, args):

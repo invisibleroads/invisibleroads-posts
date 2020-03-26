@@ -2,7 +2,7 @@ from invisibleroads_macros_descriptor import classproperty
 from invisibleroads_macros_disk import (
     check_absolute_path, make_enumerated_folder, make_random_folder)
 from invisibleroads_macros_text import normalize_key
-from os.path import exists, join
+from os.path import basename, exists, join
 from pyramid.httpexceptions import HTTPNotFound
 
 from .views import get_value
@@ -39,9 +39,11 @@ class FolderMixin(object):
         try:
             id_length = getattr(Class, 'id_length')
         except AttributeError:
-            record.folder = make_enumerated_folder(base_folder)
+            record_folder = make_enumerated_folder(base_folder)
         else:
-            record.folder = make_random_folder(base_folder, id_length)
+            record_folder = make_random_folder(base_folder, id_length)
+        record.id = basename(record_folder)
+        record.folder = record_folder
         return record
 
     @classmethod
