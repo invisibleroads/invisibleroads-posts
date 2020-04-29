@@ -1,4 +1,5 @@
-from invisibleroads_macros_configuration import set_default
+from invisibleroads_macros_configuration import (
+    expand_environment_variables, set_default)
 from os import environ
 
 from .routines.cache import configure_cache
@@ -13,6 +14,9 @@ def includeme(config):
 
 def configure_settings(config):
     settings = config.get_settings()
+
+    # Expand environment variables
+    settings = expand_environment_variables(settings)
 
     # Configure data
     if 'data.folder' in settings:
