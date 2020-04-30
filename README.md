@@ -1,8 +1,8 @@
 # InvisibleRoads Posts
 
-## Use
+Posts form the foundation for our web applications.
 
-Posts form the foundation for most of our web applications.
+## Use
 
 Install dependencies.
 
