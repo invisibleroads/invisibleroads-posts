@@ -23,7 +23,7 @@ class FolderMixin(object):
     @classmethod
     def get_from(Class, request, record_id=None):
         key = Class.singular_descriptor + '_id'
-        if not record_id:
+        if record_id is None:
             record_id = get_value(request, key)
         data_folder = request.data_folder
         record = Class(id=record_id)
