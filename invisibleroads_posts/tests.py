@@ -25,7 +25,7 @@ def config(settings):
 
 @fixture
 def settings(data_folder):
-    return {
+    yield {
         'data.folder': data_folder,
     }
 

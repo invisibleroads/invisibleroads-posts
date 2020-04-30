@@ -21,12 +21,12 @@ APPLICATION_REQUIREMENTS = [
     # cache
     'dogpile.cache',
     # shortcut
-    'invisibleroads',
-    'invisibleroads-macros-configuration',
-    'invisibleroads-macros-descriptor',
-    'invisibleroads-macros-disk',
-    'invisibleroads-macros-security',
-    'invisibleroads-macros-text',
+    'invisibleroads >= 0.2.3',
+    'invisibleroads-macros-configuration >= 1.0.2',
+    'invisibleroads-macros-descriptor >= 1.0.1',
+    'invisibleroads-macros-disk >= 1.0.2',
+    'invisibleroads-macros-security >= 1.0.0',
+    'invisibleroads-macros-text >= 1.0.1',
 ]
 TEST_REQUIREMENTS = [
     'pytest-cov',

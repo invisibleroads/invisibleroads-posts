@@ -6,9 +6,15 @@ class TestInitializePostsScript(object):
 
     def test_run(self, mocker, tmpdir):
         data_folder = tmpdir.join('data')
-        mocker.patch(
-            'invisibleroads_posts.scripts.get_appsettings',
-            return_value={'data.folder': data_folder})
         assert not exists(data_folder)
-        launch(['invisibleroads', 'initialize', 'development.ini', '--restart'])
+        mocker.patch(
+            'invisibleroads_posts.routines.configuration.'
+            'load_bootstrapped_settings',
+            return_value={'data.folder': data_folder})
+        launch([
+            'invisibleroads',
+            'initialize',
+            'test.ini',
+            '--restart',
+        ])
         assert exists(data_folder)

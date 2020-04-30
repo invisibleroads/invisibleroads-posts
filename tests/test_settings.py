@@ -2,7 +2,6 @@ from os import environ
 from pyramid import testing
 
 from invisibleroads_posts import configure_settings
-from invisibleroads_posts.constants import SECRET_LENGTH
 
 
 def test_environment_constants(data_folder):
@@ -16,10 +15,12 @@ def test_environment_constants(data_folder):
 
 
 def test_secret_constants(data_folder):
+    secret_length = 32
     config = testing.setUp(settings={
         'data.folder': data_folder,
+        'secret.length': secret_length,
         'x.secret': '',
     })
+    assert len(config.get_settings()['x.secret']) == 0
     configure_settings(config)
-    settings = config.get_settings()
-    assert len(settings['x.secret']) == SECRET_LENGTH
+    assert len(config.get_settings()['x.secret']) == secret_length
