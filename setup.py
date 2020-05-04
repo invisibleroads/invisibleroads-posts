@@ -22,7 +22,7 @@ APPLICATION_REQUIREMENTS = [
     'dogpile.cache',
     # shortcut
     'invisibleroads >= 0.2.4',
-    'invisibleroads-macros-configuration >= 1.0.4',
+    'invisibleroads-macros-configuration >= 1.0.5',
     'invisibleroads-macros-descriptor >= 1.0.1',
     'invisibleroads-macros-disk >= 1.0.2',
     'invisibleroads-macros-security >= 1.0.0',
@@ -38,7 +38,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
 
 setup(
     name='invisibleroads-posts',
-    version='0.7.5',
+    version='0.7.6',
     description='Web application defaults',
     long_description=DESCRIPTION,
     long_description_content_type='text/markdown',

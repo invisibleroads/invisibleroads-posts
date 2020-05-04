@@ -13,7 +13,7 @@ def includeme(config):
 
 def configure_settings(config):
     settings = config.get_settings()
-    settings = fill_settings(settings)
+    fill_settings(settings)
 
     if 'data.folder' in settings:
         config.add_request_method(

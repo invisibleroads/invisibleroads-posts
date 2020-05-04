@@ -9,12 +9,12 @@ from pyramid.paster import get_appsettings, setup_logging
 def load_filled_settings(configuration_path):
     setup_logging(configuration_path)
     settings = get_appsettings(configuration_path)
-    return fill_settings(settings)
+    fill_settings(settings)
+    return settings
 
 
 def fill_settings(settings):
-    settings = fill_environment_variables(settings)
-    settings = fill_secrets(settings, secret_length=set_default(
+    fill_environment_variables(settings)
+    fill_secrets(settings, secret_length=set_default(
         settings, 'secret.length', SECRET_LENGTH, int))
-    settings = fill_extensions(settings)
-    return settings
+    fill_extensions(settings)
