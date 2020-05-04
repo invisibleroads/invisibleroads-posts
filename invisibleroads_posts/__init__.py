@@ -1,8 +1,8 @@
-from invisibleroads_macros_configuration import (
-    SECRET_LENGTH, fill_environment_variables, fill_secrets, set_default)
+from invisibleroads_macros_configuration import set_default
 from os import environ
 
 from .routines.cache import configure_cache
+from .routines.configuration import fill_settings
 from .variables import FUNCTION_CACHE
 
 
@@ -13,20 +13,12 @@ def includeme(config):
 
 def configure_settings(config):
     settings = config.get_settings()
+    settings = fill_settings(settings)
 
-    # Fill environment variables
-    fill_environment_variables(settings)
-
-    # Fill secrets
-    secret_length = set_default(settings, 'secret.length', SECRET_LENGTH, int)
-    fill_secrets(settings, secret_length)
-
-    # Configure data
     if 'data.folder' in settings:
         config.add_request_method(
             lambda request: settings['data.folder'], 'data_folder', reify=True)
 
-    # Configure environment
     for line in settings.get(
             'application.environment', '').strip().splitlines():
         k, v = line.split()
