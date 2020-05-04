@@ -22,7 +22,7 @@ APPLICATION_REQUIREMENTS = [
     'dogpile.cache',
     # shortcut
     'invisibleroads >= 0.2.3',
-    'invisibleroads-macros-configuration >= 1.0.2',
+    'invisibleroads-macros-configuration >= 1.0.3',
     'invisibleroads-macros-descriptor >= 1.0.1',
     'invisibleroads-macros-disk >= 1.0.2',
     'invisibleroads-macros-security >= 1.0.0',
