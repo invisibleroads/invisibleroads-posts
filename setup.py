@@ -38,7 +38,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
 
 setup(
     name='invisibleroads-posts',
-    version='0.7.7',
+    version='0.7.8',
     description='Web application defaults',
     long_description=DESCRIPTION,
     long_description_content_type='text/markdown',
