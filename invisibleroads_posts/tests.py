@@ -4,27 +4,22 @@ from pytest import fixture
 
 
 @fixture
-def posts_request(application_config, data_folder):
+def posts_request(posts_config, data_folder):
     posts_request = testing.DummyRequest(data_folder=data_folder)
     posts_request.json_body = {}
     yield posts_request
 
 
 @fixture
-def application_config(config):
+def posts_config(posts_settings):
+    config = testing.setUp(settings=posts_settings)
     config.include('invisibleroads_posts')
-    yield config
-
-
-@fixture
-def config(settings):
-    config = testing.setUp(settings=settings)
     yield config
     testing.tearDown()
 
 
 @fixture
-def settings(data_folder):
+def posts_settings(data_folder):
     yield {
         'data.folder': data_folder,
     }
