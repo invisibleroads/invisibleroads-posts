@@ -1,6 +1,5 @@
 from invisibleroads.scripts import ConfigurableScript
 from invisibleroads_macros_disk import make_folder, remove_folder
-from pyramid.paster import get_appsettings
 
 from .routines.configuration import load_filled_settings
 

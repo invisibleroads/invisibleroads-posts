@@ -1,20 +1,31 @@
 from invisibleroads.scripts import launch
-from os.path import exists
+
+
+CONFIGURATION_TEXT = '''\
+[app:main]
+use = egg:pyramid
+data.folder = %(here)s/data
+'''
 
 
 class TestInitializePostsScript(object):
 
-    def test_run(self, mocker, tmpdir):
-        data_folder = tmpdir.join('data')
-        assert not exists(data_folder)
-        mocker.patch(
-            'invisibleroads_posts.routines.configuration.'
+    def test_run(self, mocker, tmp_path):
+        data_folder = tmp_path / 'data'
+        assert not data_folder.exists()
+
+        for function_name in [
             'load_bootstrapped_settings',
-            return_value={'data.folder': data_folder})
+            'load_filled_settings',
+        ]:
+            module_uri = 'invisibleroads_posts.routines.configuration'
+            mocker.patch(module_uri + '.' + function_name, return_value={
+                'data.folder': data_folder})
+
         launch([
             'invisibleroads',
             'initialize',
             'test.ini',
             '--restart',
         ])
-        assert exists(data_folder)
+        assert data_folder.exists()
