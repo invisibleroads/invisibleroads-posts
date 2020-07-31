@@ -1,5 +1,6 @@
 # 0.7
 - Restart from scratch
+- Restrict cross origin resource sharing
 
 # 0.6
 - Replace emphasis with highlighted
