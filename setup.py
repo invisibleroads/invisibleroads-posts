@@ -16,8 +16,6 @@ APPLICATION_CLASSIFIERS = [
 APPLICATION_REQUIREMENTS = [
     # web
     'pyramid',
-    # test
-    'pytest',
     # cache
     'dogpile.cache',
     # shortcut
@@ -30,6 +28,7 @@ APPLICATION_REQUIREMENTS = [
 ]
 TEST_REQUIREMENTS = [
     'pytest-cov',
+    'webtest',
 ]
 FOLDER = dirname(abspath(__file__))
 DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [

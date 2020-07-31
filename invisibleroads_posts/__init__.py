@@ -44,8 +44,11 @@ def configure_settings(config):
         config.add_request_method(
             lambda request: settings['data.folder'], 'data_folder', reify=True)
 
-    for line in aslist(settings.get('application.environment', '')):
-        k, v = line.split()
+    for line in settings.get(
+            'application.environment', '').strip().splitlines():
+        k, v = line.split('=', 1)
+        k = k.strip()
+        v = v.strip()
         environ[k] = v
 
 
@@ -60,8 +63,6 @@ def configure_cross_origin_resource_sharing(config):
     def see_options(request):
         response = request.response
         response_headers = response.headers
-        if 'Access-Control-Allow-Origin' not in response_headers:
-            return response
         response_headers['Access-Control-Allow-Methods'] = ','.join(
             allowed_methods)
         response_headers['Access-Control-Allow-Headers'] = ','.join(
@@ -71,16 +72,23 @@ def configure_cross_origin_resource_sharing(config):
     def set_cross_origin_resource_sharing(event):
         request = event.request
         request_headers = request.headers
-        origin = request_headers.get('Origin')
-        if origin.lower() not in allowed_origins:
-            return
+
         response = event.response
         response_headers = response.headers
+
+        origin = request_headers.get('Origin', '')
+        if origin.lower() not in allowed_origins:
+            response.headers = {
+                k: v for k, v in response_headers.items()
+                if not k.startswith('Access-Control-')
+            }
+            return
+
         response_headers['Access-Control-Allow-Origin'] = origin
         if len(allowed_origins) > 1:
             response_headers['Vary'] = 'Origin'
 
-    # https://gist.github.com/mmerickel/1afaf64154b335b596e4#file-cors-py-L39
+    # https://gist.github.com/mmerickel/1afaf64154b335b596e4
     config.add_route_predicate('cors_preflight', CorsPreflightPredicate)
     config.add_route('corsPreflight', '/{all:.*}', cors_preflight=True)
     config.add_view(

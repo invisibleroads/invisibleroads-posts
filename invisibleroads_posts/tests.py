@@ -22,6 +22,8 @@ def posts_config(posts_settings):
 def posts_settings(data_folder):
     yield {
         'data.folder': data_folder,
+        'secret.length': 32,
+        'client_cache.http.expiration_time_in_seconds': 60,
     }
 
 
