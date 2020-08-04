@@ -8,7 +8,7 @@ def handle_exception(context, request):
     status_int = context.status_int
     response = request.response
     response.status_int = status_int
-    if status_int == 400:
+    if status_int in (400, 401, 403, 404):
         response.content_type = 'application/json'
         response.text = json.dumps(context.detail)
     return response
