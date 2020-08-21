@@ -12,7 +12,7 @@ class InitializePostsScript(ConfigurableScript):
         super(InitializePostsScript, self).configure(argument_subparser)
         argument_subparser.add_argument('--restart', action='store_true')
 
-    def run(self, args):
+    def run(self, args, argv):
         settings = load_filled_settings(args.configuration_path)
         if args.restart and 'data.folder' in settings:
             remove_folder(settings['data.folder'])
