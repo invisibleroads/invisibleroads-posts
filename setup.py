@@ -14,17 +14,18 @@ APPLICATION_CLASSIFIERS = [
     'License :: OSI Approved :: MIT License',
 ]
 APPLICATION_REQUIREMENTS = [
+    # architecture
+    'invisibleroads >= 0.3.0',
     # web
     'pyramid',
     # cache
     'dogpile.cache',
     # shortcut
-    'invisibleroads >= 0.2.4',
-    'invisibleroads-macros-configuration >= 1.0.5',
-    'invisibleroads-macros-descriptor >= 1.0.1',
-    'invisibleroads-macros-disk >= 1.0.2',
-    'invisibleroads-macros-security >= 1.0.0',
-    'invisibleroads-macros-text >= 1.0.1',
+    'invisibleroads-macros-configuration >= 1.0.6',
+    'invisibleroads-macros-descriptor >= 1.0.2',
+    'invisibleroads-macros-disk >= 1.0.3',
+    'invisibleroads-macros-security >= 1.0.1',
+    'invisibleroads-macros-text >= 1.0.3',
 ]
 TEST_REQUIREMENTS = [
     'pytest-cov',
