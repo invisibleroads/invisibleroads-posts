@@ -23,7 +23,7 @@ APPLICATION_REQUIREMENTS = [
     # shortcut
     'invisibleroads-macros-configuration >= 1.0.6',
     'invisibleroads-macros-descriptor >= 1.0.2',
-    'invisibleroads-macros-disk >= 1.0.3',
+    'invisibleroads-macros-disk >= 1.0.2',
     'invisibleroads-macros-security >= 1.0.1',
     'invisibleroads-macros-text >= 1.0.3',
 ]
@@ -38,7 +38,7 @@ DESCRIPTION = '\n\n'.join(open(join(FOLDER, x)).read().strip() for x in [
 
 setup(
     name='invisibleroads-posts',
-    version='0.7.11',
+    version='0.7.12',
     description='Web application defaults',
     long_description=DESCRIPTION,
     long_description_content_type='text/markdown',
