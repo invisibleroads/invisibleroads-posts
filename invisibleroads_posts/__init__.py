@@ -1,6 +1,7 @@
 from invisibleroads_macros_configuration import set_default
 from os import environ
 from pyramid.events import NewResponse
+from pyramid.httpexceptions import HTTPError
 from pyramid.security import NO_PERMISSION_REQUIRED
 from pyramid.settings import aslist
 
@@ -34,6 +35,7 @@ def includeme(config):
     configure_settings(config)
     configure_cross_origin_resource_sharing(config)
     configure_caches(config)
+    configure_views(config)
 
 
 def configure_settings(config):
@@ -118,3 +120,9 @@ def configure_caches(config):
 
     # Configure server_cache
     configure_cache(settings, 'server_cache.function.', FUNCTION_CACHE)
+
+
+def configure_views(config):
+    config.add_exception_view(
+        lambda request: request.exception.args[0], context=HTTPError,
+        renderer='json')

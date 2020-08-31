@@ -1,17 +1,4 @@
-import json
-from pyramid.httpexceptions import HTTPBadRequest, HTTPException
-from pyramid.view import exception_view_config
-
-
-@exception_view_config(HTTPException)
-def handle_exception(context, request):
-    status_int = context.status_int
-    response = request.response
-    response.status_int = status_int
-    if status_int in (400, 401, 403, 404):
-        response.content_type = 'application/json'
-        response.text = json.dumps(context.detail)
-    return response
+from pyramid.httpexceptions import HTTPBadRequest
 
 
 def expect_integer(
