@@ -8,6 +8,7 @@ from pyramid.settings import aslist
 from .routines.cache import configure_cache
 from .routines.configuration import fill_settings
 from .variables import FUNCTION_CACHE
+from .views import handle_http_error
 
 
 class CorsPreflightPredicate(object):
@@ -124,5 +125,4 @@ def configure_caches(config):
 
 def configure_views(config):
     config.add_exception_view(
-        lambda request: request.exception.args[0], context=HTTPError,
-        renderer='json')
+        handle_http_error, context=HTTPError, renderer='json')

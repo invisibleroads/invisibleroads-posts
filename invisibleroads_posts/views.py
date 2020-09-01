@@ -1,6 +1,12 @@
 from pyramid.httpexceptions import HTTPBadRequest
 
 
+def handle_http_error(request):
+    exception = request.exception
+    request.response.status_int = exception.status_int
+    return exception.args[0]
+
+
 def expect_integer(
         request, key, parse=None, minimum=None, maximum=None, default=None):
     value = expect_value(
