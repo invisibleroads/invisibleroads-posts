@@ -1,6 +1,6 @@
 # InvisibleRoads Posts
 
-Posts form the foundation for our web applications.
+This package provides our customized foundation for building a web service using pyramid.
 
 ## Use
 
