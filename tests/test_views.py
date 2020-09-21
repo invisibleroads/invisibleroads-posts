@@ -2,7 +2,7 @@ from pyramid.httpexceptions import HTTPBadRequest
 from pytest import raises
 
 from invisibleroads_posts.views import (
-    expect_integer, expect_value, handle_exception)
+    expect_integer, expect_value, handle_http_error)
 
 
 class TestExpectValue(object):
@@ -65,12 +65,12 @@ class TestExpectInteger(object):
             expect_integer(posts_request, 'x', maximum=10)
 
 
-def test_handle_exception(mocker, posts_request):
-    context = mocker.Mock()
-    context.status_int = 400
-    context.detail = {}
-    response = handle_exception(context, posts_request)
-    assert response.content_type == 'application/json'
+def test_handle_http_error(posts_request):
+    exception = Exception({'x': 1})
+    exception.status_int = 400
+    posts_request.exception = exception
+    d = handle_http_error(posts_request)
+    assert d['x'] == 1
 
 
 def expect_100(x):

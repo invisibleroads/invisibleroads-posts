@@ -5,9 +5,10 @@ from pytest import fixture
 
 @fixture
 def posts_request(posts_config, data_folder):
-    posts_request = testing.DummyRequest(data_folder=data_folder)
-    posts_request.json_body = {}
-    yield posts_request
+    request = testing.DummyRequest(
+        data_folder=data_folder)
+    request.json_body = {}
+    yield request
 
 
 @fixture
@@ -19,8 +20,8 @@ def posts_config(posts_settings):
 
 
 @fixture
-def posts_settings(data_folder):
-    yield {
+def posts_settings():
+    return {
         'data.folder': data_folder,
         'secret.length': 32,
         'client_cache.http.expiration_time_in_seconds': 60,
