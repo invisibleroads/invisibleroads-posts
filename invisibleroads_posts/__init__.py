@@ -3,7 +3,7 @@ from os import environ
 from pyramid.events import NewResponse
 from pyramid.httpexceptions import HTTPError
 from pyramid.security import NO_PERMISSION_REQUIRED
-from pyramid.settings import aslist
+from pyramid.settings import asbool, aslist
 
 from .routines.cache import configure_cache
 from .routines.configuration import fill_settings
@@ -90,7 +90,7 @@ def configure_cross_origin_resource_sharing(config):
 
         response_headers['Access-Control-Allow-Origin'] = origin
         if allow_credentials:
-            response_headers['Access-Control-Allow-Credentials'] = True
+            response_headers['Access-Control-Allow-Credentials'] = 'true'
         if len(allowed_origins) > 1:
             response_headers['Vary'] = 'Origin'
 
