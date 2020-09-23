@@ -62,6 +62,7 @@ def configure_cross_origin_resource_sharing(config):
         return
     allowed_methods = aslist(settings.get('cors.allowed_methods', '').upper())
     allowed_headers = aslist(settings.get('cors.allowed_headers', '').title())
+    allow_credentials = asbool(settings.get('cors.allow_credentials'))
 
     def see_options(request):
         response = request.response
@@ -88,6 +89,8 @@ def configure_cross_origin_resource_sharing(config):
             return
 
         response_headers['Access-Control-Allow-Origin'] = origin
+        if allow_credentials:
+            response_headers['Access-Control-Allow-Credentials'] = True
         if len(allowed_origins) > 1:
             response_headers['Vary'] = 'Origin'
 
