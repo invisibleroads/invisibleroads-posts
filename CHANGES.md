@@ -1,6 +1,7 @@
 # 0.7
 - Restart from scratch
 - Restrict cross origin resource sharing
+- Define EnumeratedBase, RandomBase
 
 # 0.6
 - Replace emphasis with highlighted

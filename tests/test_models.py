@@ -3,7 +3,7 @@ from os.path import basename, join
 from pyramid.httpexceptions import HTTPNotFound
 from pytest import raises
 
-from invisibleroads_posts.models import Base, FolderMixin
+from invisibleroads_posts.models import EnumeratedBase, FolderMixin, RandomBase
 
 
 INSTANCE_ID = 777
@@ -42,9 +42,9 @@ class TestFolderMixin(object):
         assert basename(base_folder) == EnumeratedRecord.plural_descriptor
 
 
-class EnumeratedRecord(FolderMixin, Base):
+class EnumeratedRecord(FolderMixin, EnumeratedBase):
     pass
 
 
-class RandomRecord(FolderMixin, Base):
-    id_length = 7
+class RandomRecord(FolderMixin, RandomBase):
+    pass

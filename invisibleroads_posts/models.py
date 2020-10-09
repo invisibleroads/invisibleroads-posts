@@ -16,10 +16,14 @@ class RegisteredClass(type):
         POSTS_REGISTRY[name] = Class
 
 
-class Base(object, metaclass=RegisteredClass):
+class EnumeratedBase(object):
 
     def __init__(self, **kw):
         self.__dict__.update(kw)
+
+
+class RandomBase(EnumeratedBase, metaclass=RegisteredClass):
+    pass
 
 
 class FolderMixin(object):
