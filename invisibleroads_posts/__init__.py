@@ -57,7 +57,8 @@ def configure_settings(config):
 
 def configure_cross_origin_resource_sharing(config):
     settings = config.get_settings()
-    allowed_origins = aslist(settings.get('cors.allowed_origins', '').lower())
+    allowed_origins = aslist(settings.get(
+        'cors.allowed_origins', '').casefold())
     if not allowed_origins:
         return
     allowed_methods = aslist(settings.get('cors.allowed_methods', '').upper())
@@ -76,23 +77,29 @@ def configure_cross_origin_resource_sharing(config):
     def set_cross_origin_resource_sharing(event):
         request = event.request
         request_headers = request.headers
-
         response = event.response
         response_headers = response.headers
-
-        origin = request_headers.get('Origin', '')
-        if origin.lower() not in allowed_origins:
-            response.headers = {
-                k: v for k, v in response_headers.items()
-                if not k.startswith('Access-Control-')
-            }
-            return
-
-        response_headers['Access-Control-Allow-Origin'] = origin
         if allow_credentials:
             response_headers['Access-Control-Allow-Credentials'] = 'true'
-        if len(allowed_origins) > 1:
-            response_headers['Vary'] = 'Origin'
+        key = 'Access-Control-Allow-Origin'
+
+        if response_headers.get(key) == '*':
+            return
+        if '*' in allowed_origins:
+            response_headers[key] = '*'
+            return
+        if len(allowed_origins) == 1:
+            response_headers[key] = allowed_origins[0]
+            return
+
+        origin = request_headers.get('Origin', '')
+        if origin.casefold() not in allowed_origins:
+            response.headers = {
+                k: v for k, v in response_headers.items()
+                if not k.startswith('Access-Control-')}
+            return
+        response_headers[key] = origin
+        response_headers['Vary'] = 'Origin'
 
     # https://gist.github.com/mmerickel/1afaf64154b335b596e4
     config.add_route_predicate('cors_preflight', CorsPreflightPredicate)
