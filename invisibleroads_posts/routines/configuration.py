@@ -31,7 +31,10 @@ def fill_settings(settings):
 
 def set_attribute(settings, class_registry, attribute_name, default, parse):
     for class_name, Class in class_registry.items():
-        if class_name == 'Base' or class_name.startswith('_'):
+        if class_name in (
+            'EnumeratedBase',
+            'RandomBase',
+        ) or class_name.startswith('_'):
             continue
         prefix = getattr(Class, '__tablename__', class_name.casefold()) + '.'
         key = prefix + attribute_name
