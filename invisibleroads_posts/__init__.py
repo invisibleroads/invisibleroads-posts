@@ -5,9 +5,10 @@ from pyramid.httpexceptions import HTTPError
 from pyramid.security import NO_PERMISSION_REQUIRED
 from pyramid.settings import asbool, aslist
 
+from .constants import POST_ID_LENGTH
 from .routines.cache import configure_cache
-from .routines.configuration import fill_settings
-from .variables import FUNCTION_CACHE
+from .routines.configuration import fill_settings, set_attribute
+from .variables import FUNCTION_CACHE, POSTS_REGISTRY
 from .views import handle_http_error
 
 
@@ -42,6 +43,8 @@ def includeme(config):
 def configure_settings(config):
     settings = config.get_settings()
     fill_settings(settings)
+    set_attribute(
+        settings, POSTS_REGISTRY, 'id.length', POST_ID_LENGTH, int)
 
     if 'data.folder' in settings:
         config.add_request_method(

@@ -27,3 +27,13 @@ def fill_settings(settings):
     fill_secrets(settings, secret_length=set_default(
         settings, 'secret.length', SECRET_LENGTH, int))
     fill_extensions(settings)
+
+
+def set_attribute(settings, class_registry, attribute_name, default, parse):
+    for class_name, Class in class_registry.items():
+        if class_name == 'Base' or class_name.startswith('_'):
+            continue
+        prefix = getattr(Class, '__tablename__', class_name.casefold()) + '.'
+        key = prefix + attribute_name
+        value = set_default(settings, key, default, parse)
+        setattr(Class, attribute_name.replace('.', '_'), value)

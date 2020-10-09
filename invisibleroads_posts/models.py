@@ -5,10 +5,18 @@ from invisibleroads_macros_text import normalize_key
 from os.path import basename, exists, join
 from pyramid.httpexceptions import HTTPNotFound
 
+from .variables import POSTS_REGISTRY
 from .views import get_value
 
 
-class Base(object):
+class RegisteredClass(type):
+
+    def __init__(Class, name, *args):
+        super().__init__(name, *args)
+        POSTS_REGISTRY[name] = Class
+
+
+class Base(object, metaclass=RegisteredClass):
 
     def __init__(self, **kw):
         self.__dict__.update(kw)
