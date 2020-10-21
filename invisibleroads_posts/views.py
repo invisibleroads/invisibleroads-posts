@@ -10,16 +10,16 @@ def handle_http_error(request):
 def expect_integer(
         request, key, parse=None, minimum=None, maximum=None, default=None):
     value = expect_value(
-        request, key, int, 'expected integer', default=default)
+        request, key, int, 'must be an integer', default=default)
     if parse:
         try:
             value = parse(value)
         except ValueError:
-            raise HTTPBadRequest({key: 'unexpected value'})
+            raise HTTPBadRequest({key: 'is bad'})
     if minimum and value < minimum:
-        raise HTTPBadRequest({key: 'expected value >= %s' % minimum})
+        raise HTTPBadRequest({key: '>= %s' % minimum})
     if maximum and value > maximum:
-        raise HTTPBadRequest({key: 'expected value <= %s' % maximum})
+        raise HTTPBadRequest({key: '<= %s' % maximum})
     return value
 
 
@@ -29,7 +29,7 @@ def expect_value(request, key, parse=None, message=None, default=None):
         try:
             value = parse(value)
         except (KeyError, ValueError):
-            raise HTTPBadRequest({key: message or 'bad'})
+            raise HTTPBadRequest({key: message or 'is bad'})
     return value
 
 

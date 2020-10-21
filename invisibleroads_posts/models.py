@@ -41,7 +41,7 @@ class FolderMixin(object):
         record = Class(id=record_id)
         record_folder = record.get_folder(data_folder)
         if not exists(record_folder):
-            raise HTTPNotFound({key: 'bad'})
+            raise HTTPNotFound({key: 'is bad'})
         return record
 
     @classmethod
