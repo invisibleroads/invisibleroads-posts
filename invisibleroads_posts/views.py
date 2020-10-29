@@ -44,7 +44,7 @@ def get_value(request, key, default=None):
         pass
     try:
         return request.json_body[key]
-    except KeyError:
+    except (KeyError, TypeError):
         pass
     if default is not None:
         return default

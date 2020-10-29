@@ -30,7 +30,8 @@ class FolderMixin(object):
 
     def get_folder(self, data_folder):
         base_folder = self.get_base_folder(data_folder)
-        return check_absolute_path(str(self.id), base_folder)
+        folder = join(base_folder, str(self.id))
+        return check_absolute_path(folder, base_folder)
 
     @classmethod
     def get_from(Class, request, record_id=None):
